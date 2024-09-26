@@ -1,10 +1,6 @@
-# Proyecto Final
+# Proyecto Final. Segunda Entrega
 
-## Segunda Entrega
-
-## Actividad por desarrollar
-
-### Consultas en SQL
+## Consultas en SQL
 - Realizar 10 consultas cada uno.
   Usar
   - DISTINCT, ORDER BY, LIMIT
@@ -13,9 +9,9 @@
   - JOIN (INNER, LEFT, RIGHT)
   - Subconsultas
 
-### Vistas
+## Vistas
 
-### Triggers
+## Triggers
 
-### Procedimientos almacenados
+## Procedimientos almacenados
 
