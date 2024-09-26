@@ -1,8 +1,8 @@
 # FALTAN LAS MODIFICACIONES DE LA PRIMERA ENTREGA
 
-- [ ] Meterle 50 registros a las tablas que se puedan
-- [ ] Dejar pelicula en 3FN. Separar pelicula en distribuidores y directores
 - [ ] Revisar los checks de los atributos
+- [ ] Dejar pelicula en 3FN. Separar pelicula en distribuidores y directores
+- [ ] Meterle 50 registros a las tablas que se puedan
 
 # 🗃️ BD Proyecto Final. Segunda Entrega
 
