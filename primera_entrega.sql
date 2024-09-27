@@ -50,7 +50,7 @@ CREATE TABLE pelicula (
 -- Crear tabla sala
 CREATE TABLE sala (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    categoria VARCHAR(50) NOT NULL,
+    categoria VARCHAR(50) NOT NULL CHECK (categoria IN ('VIP','Standard','Premium')),
     capacidad INT NOT NULL CHECK (capacidad > 0),
     estado VARCHAR(50) NOT NULL CHECK (estado IN ('disponible', 'ocupada', 'mantenimiento'))
 );
@@ -142,6 +142,7 @@ CREATE TABLE combo_snack (
 -- *********************************************************************
 -- DML Statements
 -- *********************************************************************
+
 -- Insert sample d-- Insert sample data into socio
 INSERT INTO socio (nombre, paterno, materno, fecha_inicio, puntos, passwd) VALUES
 ('Juan', 'Pérez', 'Gómez', '2023-01-15', 100, 'password123'),
@@ -233,15 +234,8 @@ INSERT INTO Pelicula (titulo, distribuidor, duracion, clasificacion, director, p
 -- Insert sample data into sala
 INSERT INTO sala (categoria, capacidad, estado) VALUES
 ('VIP', 50, 'disponible'),
-('Regular', 100, 'disponible'),
 ('Standard', 75, 'ocupada'),
-('Deluxe', 40, 'disponible'),
-('Economy', 120, 'mantenimiento'),
-('Premium', 60, 'disponible'),
-('Luxury', 30, 'ocupada'),
-('Classic', 80, 'disponible'),
-('Executive', 45, 'mantenimiento'),
-('Comfort', 90, 'disponible');
+('Premium', 60, 'disponible');
 
 -- Insert sample data into funcion
 INSERT INTO funcion (id_pelicula, fecha, horario, id_sala, idioma) VALUES
