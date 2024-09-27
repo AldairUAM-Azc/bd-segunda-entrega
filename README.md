@@ -26,20 +26,18 @@ Entregables:
 
 Se deberá incluir una vista por cada integrante del equipo:
 
-Cada vista deberá tener por lo menos 3 Tablas relacionadas.
+Cada vista deberá tener por lo menos 3 Tablas relacionadas. La pura vista nada mas, en la evaluaciòn 
 
 Entregables:
 
 - [ ] Un Script que contenga la vista creada por el alumno.
 - [ ] Incluir en el diagrama relacional de la primera entrega una indicación o selección de
 las tablas utilizadas en la vista implementada. Se debe entregar un diagrama por cada
-integrante del equipo
+integrante del equipo. El diagrama pata de gallo completo de la primera entrega, identificando las tablas que cada quien uso en sus vistas.
 
 ## 🔫 Triggers
 
 Crear Triggers para realizar la automatización de una bitácora.
-
-
 
 - Crear una Tabla log o bitácora **(una tabla por todo el equipo)** que contenga por lo menos los siguientes atributos:
   - tipo de operación
