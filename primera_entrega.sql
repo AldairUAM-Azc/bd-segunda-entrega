@@ -51,7 +51,7 @@ CREATE TABLE pelicula (
 CREATE TABLE sala (
     id INT AUTO_INCREMENT PRIMARY KEY,
     categoria VARCHAR(50) NOT NULL CHECK (categoria IN ('VIP','Standard','Premium')),
-    capacidad INT NOT NULL CHECK (capacidad > 0),
+    capacidad INT NOT NULL CHECK (capacidad > 0 AND capacidad <= 50),
     estado VARCHAR(50) NOT NULL CHECK (estado IN ('disponible', 'ocupada', 'mantenimiento'))
 );
 
@@ -234,8 +234,8 @@ INSERT INTO Pelicula (titulo, distribuidor, duracion, clasificacion, director, p
 -- Insert sample data into sala
 INSERT INTO sala (categoria, capacidad, estado) VALUES
 ('VIP', 50, 'disponible'),
-('Standard', 75, 'ocupada'),
-('Premium', 60, 'disponible');
+('Standard', 50, 'ocupada'),
+('Premium', 50, 'disponible');
 
 -- Insert sample data into funcion
 INSERT INTO funcion (id_pelicula, fecha, horario, id_sala, idioma) VALUES
