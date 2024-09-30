@@ -158,8 +158,8 @@ CREATE TABLE venta_combo (
     id_combo INT NOT NULL,
     cantidad INT NOT NULL DEFAULT (1),
     PRIMARY KEY (id_venta, id_combo),
-    CONSTRAINT fk_vs_venta FOREIGN KEY (id_venta) REFERENCES venta(id) ON DELETE CASCADE,
-    CONSTRAINT fk_vs_combo FOREIGN KEY (id_combo) REFERENCES combo(id) ON DELETE CASCADE
+    CONSTRAINT fk_vc_venta FOREIGN KEY (id_venta) REFERENCES venta(id) ON DELETE CASCADE,
+    CONSTRAINT fk_vc_combo FOREIGN KEY (id_combo) REFERENCES combo(id) ON DELETE CASCADE
 );
 
 CREATE TABLE combo_snack (	
