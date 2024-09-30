@@ -1,7 +1,7 @@
 # FALTAN LAS MODIFICACIONES DE LA PRIMERA ENTREGA
 
 - [ ] Revisar los checks de los atributos
-  - [X] sala.capacidad entre 0 y 50
+  - [X] sala.capacidad entre 0 y 30
   - [X] sala.categoria IN VIP Standard Premium
 - [ ] Dejar pelicula en 3FN. Separar pelicula en distribuidores y directores
 - [ ] Meterle 50 registros a las tablas que se puedan
