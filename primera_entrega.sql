@@ -445,16 +445,14 @@ INSERT INTO snack (nombre, precio, tamanio) VALUES
 
 -- Insert sample data into combo
 INSERT INTO combo (nombre, precio) VALUES
-('Combo Familiar', 12.00),
-('Combo Individual', 6.00),
-('Combo Grande', 15.00),
-('Combo Pequeño', 8.00),
-('Combo Premium', 18.00),
-('Combo Básico', 10.00),
-('Combo Deluxe', 20.00),
-('Combo Especial', 14.00),
-('Combo Standard', 7.00),
-('Combo Extra', 16.00);
+('Combo Tradicional', 255.00),
+('Combo Nachos', 237.00),
+('Combo Grande', 194.00),
+('Combo Hot Dog', 252.00),
+('Combo Icee', 305.00),
+('Combo Pareja', 191.00),
+('Combo Amigos', 378.00),
+('Combo Helado', 175.00);
 
 
 -- Insert sample data into venta
