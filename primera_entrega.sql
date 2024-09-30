@@ -34,18 +34,39 @@ CREATE TABLE empleado (
     CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categoria_empleado(id)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
+-- Crear tabla director
+
+CREATE TABLE director (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(45),
+    apellido VARCHAR(45),
+    nacionalidad VARCHAR(45)
+);
+-- Crear tabla distribuidor
+
+CREATE TABLE distribuidor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(45),
+    pais VARCHAR(45)
+);
+
 
 -- Crear tabla pelicula
 CREATE TABLE pelicula (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(50) NOT NULL,
     duracion INT NOT NULL CHECK (duracion > 0),
-    distribuidor VARCHAR(50) NOT NULL,
-    clasificacion VARCHAR(10) NOT NULL,
-    director VARCHAR(50) NOT NULL,
-    pais VARCHAR(50) NOT NULL,
-    descripcion MEDIUMTEXT NOT NULL
+    distribuidor INT NOT NULL,
+    clasificacion VARCHAR(10) NOT NULL CHECK (clasificacion IN ('R','PG-13','PG')),
+    director INT NOT NULL,
+    descripcion MEDIUMTEXT NOT NULL,
+    CONSTRAINT fk_director FOREIGN KEY (director) REFERENCES director(id)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_distribuidor FOREIGN KEY (distribuidor) REFERENCES distribuidor(id)
+        ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+
 
 -- Crear tabla sala
 CREATE TABLE sala (
@@ -177,65 +198,181 @@ INSERT INTO empleado (nombre, paterno, materno, id_categoria, psw) VALUES
 ('Isabel', 'Álvarez', 'García', 4, 'psw313233'),
 ('Andrés', 'Cano', 'Martínez', 5, 'psw343536');
 
+-- Insert de Director
+INSERT INTO director (nombre, apellido, nacionalidad) VALUES
+('Steven', 'Spielberg', 'Estados Unidos'),
+('Christopher', 'Nolan', 'Reino Unido'),
+('Quentin', 'Tarantino', 'Estados Unidos'),
+('Martin', 'Scorsese', 'Estados Unidos'),
+('Ridley', 'Scott', 'Reino Unido'),
+('Alfonso', 'Cuarón', 'México'),
+('Guillermo', 'del Toro', 'México'),
+('Alejandro', 'González Iñárritu', 'México'),
+('Pedro', 'Almodóvar', 'España'),
+('Wes', 'Anderson', 'Estados Unidos'),
+('Stanley', 'Kubrick', 'Estados Unidos'),
+('Francis Ford', 'Coppola', 'Estados Unidos'),
+('Tim', 'Burton', 'Estados Unidos'),
+('David', 'Fincher', 'Estados Unidos'),
+('James', 'Cameron', 'Canadá'),
+('Sofia', 'Coppola', 'Estados Unidos'),
+('Paul', 'Thomas Anderson', 'Estados Unidos'),
+('Darren', 'Aronofsky', 'Estados Unidos'),
+('Spike', 'Lee', 'Estados Unidos'),
+('George', 'Lucas', 'Estados Unidos'),
+('Denis', 'Villeneuve', 'Canadá'),
+('Jean-Pierre', 'Jeunet', 'Francia'),
+('Greta', 'Gerwig', 'Estados Unidos'),
+('Bong', 'Joon-ho', 'Corea del Sur'),
+('Park', 'Chan-wook', 'Corea del Sur'),
+('Ang', 'Lee', 'Taiwán'),
+('Akira', 'Kurosawa', 'Japón'),
+('Hayao', 'Miyazaki', 'Japón'),
+('Yorgos', 'Lanthimos', 'Grecia'),
+('Ken', 'Loach', 'Reino Unido'),
+('Lars', 'von Trier', 'Dinamarca'),
+('Michel', 'Gondry', 'Francia'),
+('Luc', 'Besson', 'Francia'),
+('Roman', 'Polanski', 'Polonia'),
+('Fernando', 'Meirelles', 'Brasil'),
+('Walter', 'Salles', 'Brasil'),
+('Hirokazu', 'Koreeda', 'Japón'),
+('Taika', 'Waititi', 'Nueva Zelanda'),
+('Patty', 'Jenkins', 'Estados Unidos'),
+('Damien', 'Chazelle', 'Estados Unidos'),
+('Jane', 'Campion', 'Nueva Zelanda'),
+('Nora', 'Ephron', 'Estados Unidos'),
+('Patrice', 'Leconte', 'Francia'),
+('Claire', 'Denis', 'Francia'),
+('Mira', 'Nair', 'India'),
+('Milos', 'Forman', 'República Checa'),
+('Pedro', 'Costa', 'Portugal'),
+('Ari', 'Aster', 'Estados Unidos'),
+('Robert', 'Eggers', 'Estados Unidos'),
+('Jony', 'Hdez', 'México');
+
+-- INSERT de distribuidores
+INSERT INTO distribuidor (nombre, pais) VALUES
+('Warner Bros.', 'Estados Unidos'),
+('Universal Pictures', 'Estados Unidos'),
+('Paramount Pictures', 'Estados Unidos'),
+('Sony Pictures', 'Estados Unidos'),
+('20th Century Studios', 'Estados Unidos'),
+('Focus Features', 'Estados Unidos'),
+('Miramax Films', 'Estados Unidos'),
+('Lionsgate Films', 'Estados Unidos'),
+('A24', 'Estados Unidos'),
+('Fox Searchlight', 'Estados Unidos'),
+('Walt Disney Studios', 'Estados Unidos'),
+('Netflix', 'Estados Unidos'),
+('Amazon Studios', 'Estados Unidos'),
+('New Line Cinema', 'Estados Unidos'),
+('Columbia Pictures', 'Estados Unidos'),
+('BBC Films', 'Reino Unido'),
+('Working Title Films', 'Reino Unido'),
+('Film4 Productions', 'Reino Unido'),
+('Eon Productions', 'Reino Unido'),
+('Pathé', 'Francia'),
+('Gaumont Film Company', 'Francia'),
+('StudioCanal', 'Francia'),
+('EuropaCorp', 'Francia'),
+('Wild Bunch', 'Francia'),
+('Toho', 'Japón'),
+('Shochiku', 'Japón'),
+('Ghibli', 'Japón'),
+('CJ Entertainment', 'Corea del Sur'),
+('Showbox', 'Corea del Sur'),
+('Magnet Releasing', 'Estados Unidos'),
+('Dimension Films', 'Estados Unidos'),
+('Sony Pictures Classics', 'Estados Unidos'),
+('Canal+', 'Francia'),
+('SBS Productions', 'Francia'),
+('Cinéart', 'Bélgica'),
+('O2 Filmes', 'Brasil'),
+('Globo Filmes', 'Brasil'),
+('Participant Media', 'Estados Unidos'),
+('PolyGram Filmed Entertainment', 'Reino Unido'),
+('IFC Films', 'Estados Unidos'),
+('Aardman Animations', 'Reino Unido'),
+('Madman Entertainment', 'Australia'),
+('New Zealand Film Commission', 'Nueva Zelanda'),
+('Huayi Brothers', 'China'),
+('The Match Factory', 'Alemania'),
+('FilmNation Entertainment', 'Estados Unidos'),
+('TriStar Pictures', 'Estados Unidos'),
+('Castle Rock Entertainment', 'Estados Unidos'),
+('Annapurna Pictures', 'Estados Unidos'),
+('Nickelodeon', 'Estados Unidos');
+
 -- Insert sample data into pelicula
-INSERT INTO Pelicula (titulo, distribuidor, duracion, clasificacion, director, pais, descripcion) VALUES 
-('Inception', 'Warner Bros', 148, 'PG-13', 'Christopher Nolan', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Matrix', 'Warner Bros', 136, 'R', 'Lana Wachowski, Lilly Wachowski', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Interstellar', 'Paramount Pictures', 169, 'PG-13', 'Christopher Nolan', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Dark Knight', 'Warner Bros', 152, 'PG-13', 'Christopher Nolan', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Pulp Fiction', 'Miramax', 154, 'R', 'Quentin Tarantino', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Fight Club', '20th Century Fox', 139, 'R', 'David Fincher', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Forrest Gump', 'Paramount Pictures', 142, 'PG-13', 'Robert Zemeckis', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Shawshank Redemption', 'Columbia Pictures', 142, 'R', 'Frank Darabont', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Godfather', 'Paramount Pictures', 175, 'R', 'Francis Ford Coppola', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Godfather Part II', 'Paramount Pictures', 202, 'R', 'Francis Ford Coppola', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Lord of the Rings: The Fellowship of the Ring', 'New Line Cinema', 178, 'PG-13', 'Peter Jackson', 'New Zealand', 'Hola Mundo Descripcion Pelicula'),
-('The Lord of the Rings: The Two Towers', 'New Line Cinema', 179, 'PG-13', 'Peter Jackson', 'New Zealand', 'Hola Mundo Descripcion Pelicula'),
-('The Lord of the Rings: The Return of the King', 'New Line Cinema', 201, 'PG-13', 'Peter Jackson', 'New Zealand', 'Hola Mundo Descripcion Pelicula'),
-('Gladiator', 'DreamWorks', 155, 'R', 'Ridley Scott', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Departed', 'Warner Bros', 151, 'R', 'Martin Scorsese', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Silence of the Lambs', 'Orion Pictures', 118, 'R', 'Jonathan Demme', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Usual Suspects', 'Bryan Singer', 106, 'R', 'Bryan Singer', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Se7en', 'New Line Cinema', 127, 'R', 'David Fincher', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Lion King', 'Disney', 88, 'G', 'Roger Allers, Rob Minkoff', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Toy Story', 'Pixar', 81, 'G', 'John Lasseter', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Finding Nemo', 'Pixar', 100, 'G', 'Andrew Stanton', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Up', 'Pixar', 96, 'PG', 'Pete Docter', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('WALL-E', 'Pixar', 98, 'G', 'Andrew Stanton', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Ratatouille', 'Pixar', 111, 'G', 'Brad Bird', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Incredibles', 'Pixar', 115, 'PG', 'Brad Bird', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Monsters, Inc.', 'Pixar', 92, 'G', 'Pete Docter', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Brave', 'Pixar', 93, 'PG', 'Mark Andrews, Brenda Chapman', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Coco', 'Pixar', 105, 'PG', 'Lee Unkrich', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Inside Out', 'Pixar', 95, 'PG', 'Pete Docter', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: A New Hope', 'Lucasfilm', 121, 'PG', 'George Lucas', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: The Empire Strikes Back', 'Lucasfilm', 124, 'PG', 'Irvin Kershner', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: Return of the Jedi', 'Lucasfilm', 131, 'PG', 'Richard Marquand', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: The Phantom Menace', 'Lucasfilm', 136, 'PG', 'George Lucas', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: Attack of the Clones', 'Lucasfilm', 142, 'PG', 'George Lucas', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: Revenge of the Sith', 'Lucasfilm', 140, 'PG-13', 'George Lucas', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: The Force Awakens', 'Lucasfilm', 138, 'PG-13', 'J.J. Abrams', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: The Last Jedi', 'Lucasfilm', 152, 'PG-13', 'Rian Johnson', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Star Wars: The Rise of Skywalker', 'Lucasfilm', 142, 'PG-13', 'J.J. Abrams', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Jurassic Park', 'Universal Pictures', 127, 'PG-13', 'Steven Spielberg', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Jurassic World', 'Universal Pictures', 124, 'PG-13', 'Colin Trevorrow', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('E.T. the Extra-Terrestrial', 'Universal Pictures', 115, 'PG', 'Steven Spielberg', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Back to the Future', 'Universal Pictures', 116, 'PG', 'Robert Zemeckis', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Indiana Jones and the Raiders of the Lost Ark', 'Paramount Pictures', 115, 'PG', 'Steven Spielberg', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Indiana Jones and the Last Crusade', 'Paramount Pictures', 127, 'PG-13', 'Steven Spielberg', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Raiders of the Lost Ark', 'Paramount Pictures', 115, 'PG', 'Steven Spielberg', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Jaws', 'Universal Pictures', 124, 'PG', 'Steven Spielberg', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Casablanca', 'Warner Bros', 102, 'PG', 'Michael Curtiz', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Big Lebowski', 'Universal Pictures', 117, 'R', 'Joel Coen, Ethan Coen', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('Goodfellas', 'Warner Bros', 146, 'R', 'Martin Scorsese', 'USA', 'Hola Mundo Descripcion Pelicula'),
-('The Graduate', 'United Artists', 106, 'PG', 'Mike Nichols', 'USA', 'Hola Mundo Descripcion Pelicula');
+
+INSERT INTO pelicula (titulo, duracion, distribuidor, clasificacion, director, descripcion) VALUES
+('Jurassic Park', 127, 1, 'PG-13', 1, 'Una película sobre un parque temático donde los dinosaurios cobran vida.'),
+('Inception', 148, 2, 'PG-13', 2, 'Un ladrón roba secretos de los sueños y lucha por redimirse.'),
+('Pulp Fiction', 154, 3, 'R', 3, 'Vidas interconectadas a través de crímenes y momentos inesperados.'),
+('Goodfellas', 146, 4, 'R', 4, 'La vida de un gánster a través de varias décadas en Nueva York.'),
+('Gladiator', 155, 5, 'R', 5, 'Un general romano busca venganza tras la traición del emperador.'),
+('Gravity', 91, 6, 'PG-13', 6, 'Dos astronautas quedan atrapados en el espacio tras un accidente.'),
+('The Shape of Water', 123, 7, 'R', 7, 'Una trabajadora se enamora de una criatura acuática capturada.'),
+('The Revenant', 156, 8, 'R', 8, 'Un hombre lucha por sobrevivir tras ser atacado por un oso.'),
+('Volver', 121, 9, 'R', 9, 'Un relato sobre mujeres fuertes enfrentando el pasado y el presente.'),
+('The Grand Budapest Hotel', 99, 10, 'R', 10, 'La historia de un legendario conserje en un hotel de lujo.'),
+('A Clockwork Orange', 136, 11, 'R', 11, 'Un joven delincuente es sometido a experimentos de rehabilitación.'),
+('The Godfather', 175, 12, 'R', 12, 'La saga de una familia de la mafia en Nueva York.'),
+('Beetlejuice', 92, 13, 'PG', 13, 'Una pareja fallecida trata de ahuyentar a los nuevos residentes de su casa.'),
+('Fight Club', 139, 14, 'R', 14, 'Un hombre forma un club de lucha clandestino como escape de su vida.'),
+('Titanic', 195, 15, 'PG-13', 15, 'Una historia de amor a bordo del famoso barco Titanic.'),
+('Lost in Translation', 102, 16, 'R', 16, 'Un actor y una joven forjan una conexión inesperada en Tokio.'),
+('There Will Be Blood', 158, 17, 'R', 17, 'La vida de un magnate del petróleo obsesionado con el poder.'),
+('Black Swan', 108, 18, 'R', 18, 'Una bailarina lucha con la presión mientras se prepara para su papel soñado.'),
+('Do the Right Thing', 120, 19, 'R', 19, 'Un día de tensión racial en un vecindario de Brooklyn.'),
+('Star Wars', 121, 20, 'PG', 20, 'Una lucha épica entre el bien y el mal en una galaxia muy lejana.'),
+('Blade Runner 2049', 164, 21, 'R', 21, 'Un replicante descubre un secreto que podría cambiar el futuro.'),
+('Amélie', 122, 22, 'R', 22, 'Una joven busca mejorar la vida de los que la rodean en París.'),
+('Lady Bird', 94, 23, 'R', 23, 'Una joven navega por los retos de la adolescencia en Sacramento.'),
+('Parasite', 132, 24, 'R', 24, 'Una familia pobre se infiltra en la vida de una familia rica.'),
+('Oldboy', 120, 25, 'R', 25, 'Un hombre busca venganza tras ser encarcelado sin explicación durante 15 años.'),
+('Crouching Tiger, Hidden Dragon', 120, 26, 'PG-13', 26, 'Guerreros expertos buscan recuperar una espada robada en la antigua China.'),
+('Seven Samurai', 207, 27, 'PG', 27, 'Un grupo de samuráis defiende una aldea de bandidos.'),
+('Spirited Away', 125, 28, 'PG', 28, 'Una niña queda atrapada en un misterioso mundo de espíritus.'),
+('The Lobster', 119, 29, 'R', 29, 'En una sociedad distópica, los solteros son convertidos en animales si no encuentran pareja.'),
+('I, Daniel Blake', 100, 30, 'R', 30, 'Un carpintero lucha contra el sistema de seguridad social del Reino Unido.'),
+('Melancholia', 135, 31, 'R', 31, 'Dos hermanas enfrentan la inminente colisión de un planeta con la Tierra.'),
+('Eternal Sunshine of the Spotless Mind', 108, 32, 'R', 32, 'Un hombre intenta borrar los recuerdos de su exnovia de su mente.'),
+('The Fifth Element', 126, 33, 'PG-13', 33, 'Un taxista en el futuro se encuentra con el elemento clave para salvar a la humanidad.'),
+('The Pianist', 150, 34, 'R', 34, 'Un pianista judío sobrevive a la ocupación nazi en Varsovia.'),
+('City of God', 130, 35, 'R', 35, 'La historia de dos jóvenes que crecen en una favela de Río de Janeiro.'),
+('The Motorcycle Diaries', 126, 36, 'R', 36, 'Un joven Ernesto "Che" Guevara viaja por Sudamérica y se enfrenta a las injusticias sociales.'),
+('Shoplifters', 121, 37, 'R', 37, 'Una familia pobre sobrevive cometiendo pequeños robos en Tokio.'),
+('Jojo Rabbit', 108, 38, 'PG-13', 38, 'Un niño nazi descubre que su madre está escondiendo a una niña judía en su casa.'),
+('Wonder Woman', 141, 39, 'PG-13', 39, 'La princesa amazona Diana se convierte en la heroína conocida como Wonder Woman.'),
+('La La Land', 128, 40, 'PG-13', 40, 'Una historia de amor entre una aspirante a actriz y un músico en Los Ángeles.'),
+('The Power of the Dog', 126, 41, 'R', 41, 'Dos hermanos enfrentan tensiones familiares en el oeste americano.'),
+('Julie & Julia', 123, 42, 'PG-13', 42, 'Una joven decide cocinar todas las recetas de Julia Child en un año.'),
+('The Girl on the Bridge', 120, 43, 'R', 43, 'Una mujer joven es rescatada de una vida problemática por un lanzador de cuchillos.'),
+('Beau Travail', 93, 44, 'R', 44, 'Un exoficial de la Legión Extranjera francesa reflexiona sobre su vida mientras patrulla en África.'),
+('Monsoon Wedding', 114, 45, 'R', 45, 'Una boda en Nueva Delhi revela las tensiones familiares y secretos ocultos.'),
+('One Flew Over the Cuckoo\'s Nest', 133, 46, 'R', 46, 'Un hombre rebelde lidera una revuelta en una institución mental.'),
+('Vitalina Varela', 124, 47, 'R', 47, 'Una mujer viaja a Portugal después de la muerte de su esposo para descubrir su vida secreta.'),
+('Hereditary', 127, 48, 'R', 48, 'Una familia descubre oscuros secretos tras la muerte de su abuela.'),
+('The Lighthouse', 110, 49, 'R', 49, 'Dos fareros en una isla remota luchan con la locura y los secretos ocultos.'),
+('Avatar', 162, 50, 'PG-13', 15, 'Un marine parapléjico se infiltra en una raza alienígena en Pandora.');
+
 
 
 -- Insert sample data into sala
 INSERT INTO sala (categoria, capacidad, estado) VALUES
 ('VIP', 50, 'disponible'),
-('Standard', 50, 'ocupada'),
-('Premium', 50, 'disponible');
+('Standard', 40, 'ocupada'),
+('Premium', 45, 'disponible'),
+('VIP', 30, 'mantenimiento'),
+('Standard', 25, 'ocupada'),
+('Premium', 50, 'disponible'),
+('Standard', 35, 'disponible'),
+('VIP', 40, 'ocupada'),
+('Premium', 30, 'mantenimiento'),
+('Standard', 50, 'disponible');
+
 
 -- Insert sample data into funcion
 INSERT INTO funcion (id_pelicula, fecha, horario, id_sala, idioma) VALUES
