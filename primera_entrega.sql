@@ -72,7 +72,7 @@ CREATE TABLE pelicula (
 CREATE TABLE sala (
     id INT AUTO_INCREMENT PRIMARY KEY,
     categoria VARCHAR(50) NOT NULL CHECK (categoria IN ('VIP','Standard','Premium')),
-    capacidad INT NOT NULL CHECK (capacidad > 0 AND capacidad <= 50),
+    capacidad INT NOT NULL CHECK (capacidad > 0 AND capacidad <= 30),
     estado VARCHAR(50) NOT NULL CHECK (estado IN ('disponible', 'ocupada', 'mantenimiento'))
 );
 
@@ -125,8 +125,8 @@ CREATE TABLE combo (
 
 CREATE TABLE asiento (
 	id_sala INT NOT NULL,
-    	numero INT NOT NULL,
-	estado VARCHAR(10) NOT NULL CHECK (estado IN ('disponible', 'ocupado')) DEFAULT 'disponible',
+	numero INT NOT NULL,
+	estado VARCHAR(12) NOT NULL CHECK (estado IN ('disponible', 'descompuesto')) DEFAULT 'disponible',
     PRIMARY KEY (id_sala, numero),
     CONSTRAINT fk_a_id_sala FOREIGN KEY (id_sala) REFERENCES sala(id)
 );
@@ -137,6 +137,7 @@ CREATE TABLE boleto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_funcion INT NOT NULL,
     id_venta INT NOT NULL,
+    num_boleto INT NOT NULL,
     CONSTRAINT fk_b_funcion FOREIGN KEY (id_funcion) REFERENCES funcion(id),
     CONSTRAINT fk_b_venta FOREIGN KEY (id_venta) REFERENCES venta(id)
 );
@@ -362,16 +363,16 @@ INSERT INTO pelicula (titulo, duracion, distribuidor, clasificacion, director, d
 
 -- Insert sample data into sala
 INSERT INTO sala (categoria, capacidad, estado) VALUES
-('VIP', 50, 'disponible'),
-('Standard', 40, 'ocupada'),
-('Premium', 45, 'disponible'),
-('VIP', 30, 'mantenimiento'),
-('Standard', 25, 'ocupada'),
-('Premium', 50, 'disponible'),
-('Standard', 35, 'disponible'),
-('VIP', 40, 'ocupada'),
-('Premium', 30, 'mantenimiento'),
-('Standard', 50, 'disponible');
+('VIP', 30, 'disponible'),
+('Standard', 30, 'ocupada'),
+('Premium', 30, 'disponible'),
+('VIP', 30, 'disponible'),
+('Standard', 30, 'ocupada'),
+('Premium', 30, 'disponible'),
+('VIP', 30, 'disponible'),
+('Standard', 30, 'ocupada'),
+('Premium', 30, 'disponible'),
+('VIP', 30, 'disponible');
 
 
 -- Insert sample data into funcion
@@ -429,25 +430,25 @@ INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) V
 
 -- Insert sample data into asiento
 INSERT INTO asiento (id_sala, numero, estado) VALUES
-(1, 1, 'disponible'), (1, 2, 'ocupado'), (1, 3, 'disponible'), (1, 4, 'ocupado'), (1, 5, 'disponible'), (1, 6, 'disponible'), (1, 7, 'ocupado'), 
-(1,8,'disponible'), (1, 9, 'disponible'), (1, 10, 'disponible'),(2,1,'disponible'),(2,2,'disponible'), (2, 3, 'ocupado'), (2, 4, 'disponible'), (2, 5, 'disponible'), 
-(2, 6, 'ocupado'), (2, 7, 'disponible'), (2, 8, 'disponible'), (2, 9, 'disponible'), (2, 10, 'ocupado'),(3, 1, 'ocupado'), (3, 2, 'disponible'), (3, 3, 'disponible'), 
-(3, 4, 'ocupado'), (3, 5, 'disponible'), (3, 6, 'disponible'), (3, 7, 'disponible'), (3, 8, 'ocupado'), (3, 9, 'disponible'), (3, 10, 'disponible'),(4, 1, 'disponible'), 
-(4, 2, 'ocupado'), (4, 3, 'disponible'), (4, 4, 'disponible'), (4, 5, 'ocupado'), (4, 6, 'disponible'), (4, 7, 'disponible'), (4, 8, 'disponible'), (4, 9, 'ocupado'), 
-(4, 10, 'disponible'),(5, 1, 'disponible'), (5, 2, 'disponible'), (5, 3, 'ocupado'), (5, 4, 'disponible'), (5, 5, 'disponible'), (5, 6, 'disponible'), (5, 7, 'ocupado'), 
+(1, 1, 'disponible'), (1, 2, 'disponible'), (1, 3, 'disponible'), (1, 4, 'descompuesto'), (1, 5, 'disponible'), (1, 6, 'disponible'), (1, 7, 'descompuesto'), 
+(1,8,'disponible'), (1, 9, 'disponible'), (1, 10, 'disponible'), (2,1,'disponible'), (2,2,'disponible'), (2, 3, 'descompuesto'), (2, 4, 'disponible'), (2, 5, 'disponible'), 
+(2, 6, 'descompuesto'), (2, 7, 'disponible'), (2, 8, 'disponible'), (2, 9, 'disponible'), (2, 10, 'descompuesto'), (3, 1, 'descompuesto'), (3, 2, 'disponible'), (3, 3, 'disponible'), 
+(3, 4, 'descompuesto'), (3, 5, 'disponible'), (3, 6, 'disponible'), (3, 7, 'disponible'), (3, 8, 'descompuesto'), (3, 9, 'disponible'), (3, 10, 'disponible'), (4, 1, 'disponible'), 
+(4, 2, 'descompuesto'), (4, 3, 'disponible'), (4, 4, 'disponible'), (4, 5, 'descompuesto'), (4, 6, 'disponible'), (4, 7, 'disponible'), (4, 8, 'disponible'), (4, 9, 'descompuesto'), 
+(4, 10, 'disponible'), (5, 1, 'disponible'), (5, 2, 'disponible'), (5, 3, 'descompuesto'), (5, 4, 'disponible'), (5, 5, 'disponible'), (5, 6, 'disponible'), (5, 7, 'descompuesto'), 
 (5, 8, 'disponible'), (5, 9, 'disponible'), (5, 10, 'disponible');
 
 
 
 -- Insert sample data into boleto
-INSERT INTO boleto (id_funcion, id_venta) VALUES
-(1, 1), (1, 1), (1, 1), (1, 1), (1, 1),
-(1, 1), (1, 1), (1, 1), (1, 1), (1, 1),
-(2, 2), (2, 2), (2, 2), (2, 2), (2, 2),
-(2, 2), (2, 2), (2, 2), (2, 2), (2, 2),
-(3, 3), (3, 3), (3, 3), (3, 3), (3, 3),
-(3, 3), (3, 3), (3, 3), (3, 3), (3, 3),
-(4, 4), (4, 4), (4, 4), (4, 4), (4, 4);
+INSERT INTO boleto (id_funcion, id_venta, num_boleto) VALUES
+(1, 1, 1), (1, 1, 2), (1, 1, 3), (1, 1, 4), (1, 1, 5),
+(1, 1, 6), (1, 1, 7), (1, 1, 8), (1, 1, 9), (1, 1, 10),
+(2, 2, 1), (2, 2, 2), (2, 2, 3), (2, 2, 4), (2, 2, 5),
+(2, 2, 14), (2, 2, 13), (2, 2, 12), (2, 2, 11), (2, 2, 10),
+(3, 3, 20), (3, 3, 3), (3, 3, 2), (3, 3, 5), (3, 3, 8),
+(3, 3, 28), (3, 3, 29), (3, 3, 30), (3, 3, 21), (3, 3, 22),
+(4, 4, 15), (4, 4, 16), (4, 4, 17), (4, 4, 18), (4, 4, 19);
 
 -- Insert sample data into venta_snack
 INSERT INTO venta_snack (id_venta, id_snack) VALUES
