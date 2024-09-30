@@ -427,16 +427,19 @@ INSERT INTO funcion (id_pelicula, fecha, horario, id_sala, idioma) VALUES
 
 -- Insert sample data into snack
 INSERT INTO snack (nombre, precio, tamanio) VALUES
-('Palomitas', 5.00, 'chico'),
-('Refresco', 3.00,'mediano'),
-('Nachos', 6.00, null),
-('Dulces', 4.00, null),
-('Hot Dog', 7.00, null),
-('Cerveza', 5.50, null),
-('Agua', 2.00, null),
-('Chocolates', 4.50, null),
-('Galletas', 3.50, null),
-('Pretzels', 4.00, null);
+('Palomitas', 70.00, 'chico'),
+('Palomitas', 85.00, 'mediano'),
+('Palomitas', 90.00, 'grande'),
+('Refresco', 45.00,'chico'),
+('Refresco', 50.00,'mediano'),
+('Refresco', 55.00,'grande'),
+('Nachos', 89.00, null),
+('Hot Dog', 100.00, null),
+('Agua', 43.00, null),
+('Chocolates', 48.50, null),
+('Galletas', 22.50, null),
+('Icee', 92.00, null),
+('Queso', 22.00, null);
 
 -- Insert sample data into combo
 INSERT INTO combo (nombre, precio) VALUES
