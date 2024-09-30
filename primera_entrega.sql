@@ -147,15 +147,25 @@ CREATE TABLE boleto (
 CREATE TABLE venta_snack (	
     id_venta INT NOT NULL,
     id_snack INT NOT NULL,
+    cantidad INT NOT NULL DEFAULT (1),
     PRIMARY KEY (id_venta, id_snack),
     CONSTRAINT fk_vs_venta FOREIGN KEY (id_venta) REFERENCES venta(id) ON DELETE CASCADE,
     CONSTRAINT fk_vs_snack FOREIGN KEY (id_snack) REFERENCES snack(id) ON DELETE CASCADE
 );
 
+CREATE TABLE venta_combo (	
+    id_venta INT NOT NULL,
+    id_combo INT NOT NULL,
+    cantidad INT NOT NULL DEFAULT (1),
+    PRIMARY KEY (id_venta, id_combo),
+    CONSTRAINT fk_vs_venta FOREIGN KEY (id_venta) REFERENCES venta(id) ON DELETE CASCADE,
+    CONSTRAINT fk_vs_combo FOREIGN KEY (id_combo) REFERENCES combo(id) ON DELETE CASCADE
+);
+
 CREATE TABLE combo_snack (	
     id_combo INT NOT NULL,
     id_snack INT NOT NULL,
-    quantity INT NOT NULL,
+    unidades INT NOT NULL,
     PRIMARY KEY (id_combo, id_snack),
     CONSTRAINT fk_cs_combo FOREIGN KEY (id_combo) REFERENCES combo(id) ON DELETE CASCADE,
     CONSTRAINT fk_cs_snack FOREIGN KEY (id_snack) REFERENCES snack(id) ON DELETE CASCADE
@@ -597,21 +607,72 @@ INSERT INTO boleto (id_venta, id_funcion, num_boleto) VALUES
 (39, 10, 30);
 
 
--- Insert sample data into venta_snack
-INSERT INTO venta_snack (id_venta, id_snack) VALUES
-(1, 1),(1, 2),
-(2, 3),(2, 4),
-(3, 5),(3, 6),
-(4, 7),(4, 8),
-(5, 9),(5, 10),
-(6, 1),(6, 3),
-(7, 2),(7, 4),
-(8, 5),(8, 6),
-(9, 7),(9, 8),
-(10, 9);
+INSERT INTO venta_snack (id_venta, id_snack, cantidad) VALUES
+(26, 6, 1),
+(25, 4, 2),
+(22, 14, 3),
+(40, 10, 3),
+(26, 8, 1),
+(10, 12, 4),
+(49, 3, 3),
+(45, 3, 1),
+(34, 13, 1),
+(37, 1, 2),
+(14, 7, 4),
+(17, 8, 4),
+(15, 7, 3),
+(15, 1, 4),
+(8, 12, 3),
+(20, 8, 4),
+(13, 12, 3),
+(13, 6, 1),
+(15, 9, 1),
+(8, 3, 3),
+(48, 13, 2),
+(7, 9, 4),
+(12, 14, 2),
+(40, 14, 2),
+(50, 3, 2),
+(12, 7, 2),
+(5, 1, 4),
+(23, 7, 3),
+(4, 6, 3),
+(9, 3, 1);
 
--- Insert sample data into combo_snack
-INSERT INTO combo_snack (id_combo, id_snack, quantity) VALUES
+INSERT INTO venta_combo (id_venta, id_combo, cantidad) VALUES
+(44, 1, 2),
+(17, 7, 2),
+(36, 2, 1),
+(43, 4, 2),
+(18, 6, 2),
+(11, 5, 2),
+(35, 6, 1),
+(36, 8, 3),
+(6, 2, 1),
+(34, 3, 1),
+(35, 7, 1),
+(34, 6, 1),
+(48, 8, 1),
+(10, 4, 2),
+(3, 3, 1),
+(15, 6, 2),
+(7, 3, 3),
+(5, 1, 3),
+(29, 5, 1),
+(31, 4, 1),
+(22, 2, 3),
+(37, 5, 1),
+(5, 4, 2),
+(26, 1, 1),
+(15, 3, 1),
+(21, 1, 3),
+(44, 4, 1),
+(18, 6, 3),
+(24, 5, 2),
+(27, 4, 1);
+	
+-- Contenido de cada combo
+INSERT INTO combo_snack (id_combo, id_snack, unidades) VALUES
 (1,3,1),(1,6,2),
 (2,3,1),(2,6,2),(2,7,1),(2,13,1),(2,10,1),
 (3,3,1),(3,6,1),(3,10,1),
