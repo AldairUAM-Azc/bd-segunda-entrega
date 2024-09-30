@@ -46,7 +46,7 @@ CREATE TABLE director (
 
 CREATE TABLE distribuidor (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(45),
+    nombre VARCHAR(45) UNIQUE,
     pais VARCHAR(45)
 );
 
