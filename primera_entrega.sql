@@ -611,10 +611,8 @@ INSERT INTO venta_snack (id_venta, id_snack, cantidad) VALUES
 (26, 6, 1),
 (25, 4, 2),
 (22, 14, 3),
-(40, 10, 3),
 (26, 8, 1),
 (10, 12, 4),
-(45, 3, 1),
 (34, 13, 1),
 (37, 1, 2),
 (14, 7, 4),
@@ -629,7 +627,6 @@ INSERT INTO venta_snack (id_venta, id_snack, cantidad) VALUES
 (8, 3, 3),
 (7, 9, 4),
 (12, 14, 2),
-(40, 14, 2),
 (12, 7, 2),
 (5, 1, 4),
 (23, 7, 3),
@@ -637,10 +634,8 @@ INSERT INTO venta_snack (id_venta, id_snack, cantidad) VALUES
 (9, 3, 1);
 
 INSERT INTO venta_combo (id_venta, id_combo, cantidad) VALUES
-(44, 1, 2),
 (17, 7, 2),
 (36, 2, 1),
-(43, 4, 2),
 (18, 6, 2),
 (11, 5, 2),
 (35, 6, 1),
@@ -649,7 +644,6 @@ INSERT INTO venta_combo (id_venta, id_combo, cantidad) VALUES
 (34, 3, 1),
 (35, 7, 1),
 (34, 6, 1),
-(48, 8, 1),
 (10, 4, 2),
 (3, 3, 1),
 (15, 6, 2),
@@ -663,8 +657,6 @@ INSERT INTO venta_combo (id_venta, id_combo, cantidad) VALUES
 (26, 1, 1),
 (15, 3, 1),
 (21, 1, 3),
-(44, 4, 1),
-(18, 6, 3),
 (24, 5, 2),
 (27, 4, 1);
 	
