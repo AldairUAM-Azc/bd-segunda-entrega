@@ -12,8 +12,8 @@ BEGIN
     FROM funcion 
     WHERE id_pelicula = NEW.id_pelicula;
 
-    IF total_funciones > 15 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se pueden programar más de 15 funciones para cada película.';
+    IF total_funciones > 10 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se pueden programar más de 10 funciones para cada película.';
     END IF;
 END;
 

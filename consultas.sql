@@ -35,11 +35,15 @@ FROM funcion
 GROUP BY idioma;
 
 /*
-5.- ¿cuántas funciones están programadas por idioma? Se requiere listar solo aquellos idiomas que tienen menos de tres funciones.
+5.- Contar cuántas películas hay de cada clasificación por distribuidor, mostrando solo distribuidoras que tienen más de 3 películas clasificación "R".
 */
-SELECT idioma, COUNT(*) AS cantidad_funciones
-FROM  funcion
-GROUP BY idioma  HAVING  COUNT(*) < 3;
+SSELECT d.nombre, p.clasificacion, COUNT(*) AS total_peliculas
+FROM distribuidor d
+JOIN pelicula p ON d.id = p.distribuidor
+GROUP BY d.id, p.clasificacion
+HAVING p.clasificacion = 'R' AND COUNT(*) > 3;
+
+
 
 /* 
 6.- En una revisión, necesitan saber cuales fueron las ultimas 15 funciones programadas. Neceitan ver el nombre de la pelicula y los datos de la funcion tales como fecha, hora y sala.
@@ -83,3 +87,14 @@ SELECT p.clasificacion, COUNT(DISTINCT f.id_sala) AS total_funciones
 FROM funcion f INNER JOIN pelicula p ON f.id_pelicula = p.id
 WHERE p.clasificacion IN ('PG', 'PG-13', 'R')
 GROUP BY p.clasificacion;
+
+/*
+11.- ¿Cuanto tiempo llevaria reproducir todas las peliculas cuyo nombre termine con la letra s, y la duracion sea mayor a 120?
+
+Me faltaba SUM y no se me ocurrio algo bueno.
+*/
+SELECT SUM(duracion) AS tiempo_total
+FROM pelicula
+WHERE titulo LIKE '%s' AND duracion > 120;
+
+
