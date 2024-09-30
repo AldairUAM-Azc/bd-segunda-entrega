@@ -37,7 +37,7 @@ GROUP BY idioma;
 /*
 5.- Contar cuántas películas hay de cada clasificación por distribuidor, mostrando solo distribuidoras que tienen más de 3 películas clasificación "R".
 */
-SSELECT d.nombre, p.clasificacion, COUNT(*) AS total_peliculas
+SELECT d.nombre, p.clasificacion, COUNT(*) AS total_peliculas
 FROM distribuidor d
 JOIN pelicula p ON d.id = p.distribuidor
 GROUP BY d.id, p.clasificacion
@@ -97,4 +97,66 @@ SELECT SUM(duracion) AS tiempo_total
 FROM pelicula
 WHERE titulo LIKE '%s' AND duracion > 120;
 
+/*
+ *José Vicente López López
+ *Consultas
+*/
 
+-- 1.- Se desea conocer el id y el nombre de los socios que tienen más de 100 puntos para ofrecerles una promocion especial, limitado a los 10 mejores socios
+SELECT id, nombre, paterno, materno, puntos 
+FROM socio 
+WHERE puntos>100 
+ORDER BY puntos DESC;
+
+-- 2.- Se quiere obtener una lista unica de peliculas que tengan una duracion myor a 120 minutos y que esten en la sala VIP
+SELECT DISTINCT p.titulo, s.categoria
+FROM funcion AS f INNER JOIN pelicula AS p ON f.id_pelicula=p.id INNER JOIN sala AS s ON f.id_sala=s.id
+WHERE s.categoria='VIP';
+
+-- 3.- Se busca obtener los nombres de los empleados que pertenecen a la categoria  taquillero
+SELECT e.id, e.nombre, e.paterno
+FROM venta AS v INNER JOIN empleado AS e ON v.id_empleado=e.id
+WHERE v.area='taquilla';
+
+-- 4.- Se desea conocer las funciones programada entre 2 fechas especificas de la semana del 16/09/2024 al 18/09/2024
+SELECT p.titulo, f.fecha, f.horario, s.id AS sala
+FROM funcion AS f INNER JOIN pelicula AS p ON f.id_pelicula=p.id INNER JOIN sala AS s ON f.id_sala=s.id
+WHERE f.fecha BETWEEN '2024-09-16' AND '2024-09-18';
+
+-- 5.- Se desea obtener un conteo del numero de ventas realizadas en cada area del cine para evaluar el desempeño de cada una
+SELECT area, COUNT(*) AS 'numero ventas' 
+FROM venta
+GROUP BY area 
+HAVING COUNT(*)>0 
+ORDER BY 'numero ventas';
+
+-- 6.- Se desea calcular el total de ingresos obtenidos por las ventas de boletos para evaluar la rentabilidad de las areas de venta
+SELECT area AS 'Area', SUM(total) AS 'Total Ventas'
+FROM venta
+GROUP BY area;
+
+-- 7.- Se desea conocer las salas disponibles para programar nuevas funciones ordenadas de menor a mayor capacidad para optimizar las asignaciones de las peliculas
+SELECT s.id AS Sala
+FROM funcion AS f LEFT JOIN sala AS s ON f.id_sala=s.id
+WHERE horario='18:00'
+ORDER BY s.capacidad DESC;
+
+-- 8.- Se desea obtener el estado de todos los asientos de una sala especifica para verificar la disponibilidad antes de programar funciones
+SELECT s.id AS Sala, a.estado, COUNT(*) AS cantidad
+FROM sala AS s INNER JOIN asiento AS a ON s.id = a.id_sala
+WHERE s.categoria='VIP'
+GROUP BY s.id, a.estado;
+
+-- 9.- Se desea calcular la cantidad de boletos vendidos por cada pelicula, para saber que peliculas son las más solicitadas
+SELECT p.titulo, COUNT(*) AS 'Total Boletos'
+FROM pelicula AS p INNER JOIN funcion AS f ON p.id=f.id_pelicula INNER JOIN boleto AS b ON f.id=b.id_funcion
+GROUP BY p.titulo;
+
+-- 10.- Se desea conocer el total de ventas de los empleados de taquilla para darle un bono de productividad al los que tengan los primeros tres lugares
+SELECT DISTINCT e.id, e.nombre, e.paterno, e.materno, SUM(v.total) AS Total_venta
+FROM empleado AS e
+INNER JOIN venta AS v ON e.id = v.id_empleado
+WHERE v.area = 'taquilla'
+GROUP BY e.id, e.nombre, e.paterno, e.materno
+ORDER BY Total_venta DESC
+LIMIT 3;
