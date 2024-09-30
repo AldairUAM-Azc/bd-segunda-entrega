@@ -440,7 +440,8 @@ INSERT INTO snack (nombre, precio, tamanio) VALUES
 ('Chocolates', 48.50, null),
 ('Galletas', 22.50, null),
 ('Icee', 92.00, null),
-('Queso', 22.00, null);
+('Queso', 22.00, null),
+('Helado',45.00,null);
 
 -- Insert sample data into combo
 INSERT INTO combo (nombre, precio) VALUES
