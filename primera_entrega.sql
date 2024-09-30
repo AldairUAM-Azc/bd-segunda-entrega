@@ -155,6 +155,7 @@ CREATE TABLE venta_snack (
 CREATE TABLE combo_snack (	
     id_combo INT NOT NULL,
     id_snack INT NOT NULL,
+    quantity INT NOT NULL,
     PRIMARY KEY (id_combo, id_snack),
     CONSTRAINT fk_cs_combo FOREIGN KEY (id_combo) REFERENCES combo(id) ON DELETE CASCADE,
     CONSTRAINT fk_cs_snack FOREIGN KEY (id_snack) REFERENCES snack(id) ON DELETE CASCADE
@@ -609,14 +610,12 @@ INSERT INTO venta_snack (id_venta, id_snack) VALUES
 (10, 9);
 
 -- Insert sample data into combo_snack
-INSERT INTO combo_snack (id_combo, id_snack) VALUES
-(1, 1),(1, 2),
-(2, 3),(2, 4),
-(3, 5),(3, 6),
-(4, 7),(4, 8),
-(5, 9),(5, 10),
-(6, 1),(6, 3),
-(7, 2),(7, 4),
-(8, 5),(8, 6),
-(9, 7),(9, 8),
-(10, 9);
+INSERT INTO combo_snack (id_combo, id_snack, quantity) VALUES
+(1,3,1),(1,6,2),
+(2,3,1),(2,6,2),(2,7,1),(2,13,1),(2,10,1),
+(3,3,1),(3,6,1),(3,10,1),
+(4,3,1),(4,6,2),(4,8,2),(4,10,1),
+(5,3,1),(5,12,2),(5,10,1),
+(6,3,1),(6,6,2),(6,10,2),
+(7,3,2),(7,6,4),(7,10,2),
+(8,3,1),(8,6,1),(8,14,1);
