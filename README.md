@@ -40,14 +40,17 @@
 
 ---
 ### Aldair
-
-   
-
-
-
-
-
-
+1. Se necesita un ranking de los empleados con mas ventas en la dulceria en el mes
+2. Quiero saber que snacks estan incluidas en cada combo
+3. Se quiere hacer un reporte de las ventas que indique cuanto dinero se vende en dulceria cada mes
+4. Se necesita un ranking con los tres socios que mas han comprado en dulceria a fin de darles boletos gratis al cine.
+5. Se quiere tener una lista de los productos mas vendidos en la dulceria. Ya sea snack o combo.
+6. El socio que mas ha gastado en dulceria
+7. Encuentra las ventas de dulceria del socio que mas ha gastado.
+8. Muestra las snacks que NO estan incluidas en ningun combo
+9. Cuenta el total de ventas entre un rango de dias.
+10. Busca las ventas de los socios cuyos nombres empiezen con 'A'
+    
 La consulta debe mostrar el nombre del distribuidor y su duración promedio de las películas.
 Cada integrante del equipo debe realizar 10 consultas, sin repetir ninguna, utilizando:
   - DISTINCT, ORDER BY, LIMIT
