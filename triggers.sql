@@ -3,7 +3,6 @@ CREATE TABLE bitacora (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tipo_operacion VARCHAR(20) NOT NULL,
     tabla_afectada VARCHAR(50) NOT NULL,
-    numero_registro INT NOT NULL,
     valores_anteriores MEDIUMTEXT,
     valores_nuevos MEDIUMTEXT,
     usuario_aplicacion VARCHAR(50) NOT NULL,
@@ -39,9 +38,9 @@ AFTER INSERT ON venta
 FOR EACH ROW
 BEGIN
     -- Registrar la operación en la tabla de bitácora para la venta
-    INSERT INTO bitacora (tipo_operacion, tabla_afectada, numero_registro, valores_anteriores, valores_nuevos, usuario_aplicacion)
-    VALUES ('INSERT', 'venta', NEW.id, '',
-            CONCAT('ID Empleado: ', NEW.id_empleado, '; ID Socio: ', NEW.id_socio, '; Total: ', NEW.total), 
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('INSERT', 'venta', null,
+            CONCAT(NEW.id ':', NEW.id_empleado, ':', NEW.id_socio, ':', NEW.total, ':',NEW.creada_en, ':', NEW.metodo_pago, ':', NEW.area), 
             USER());
 
 END //
