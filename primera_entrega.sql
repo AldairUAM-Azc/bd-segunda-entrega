@@ -512,6 +512,7 @@ INSERT INTO asiento (id_sala, numero, estado) VALUES
 (4, 10, 'disponible'), (5, 1, 'disponible'), (5, 2, 'disponible'), (5, 3, 'descompuesto'), (5, 4, 'disponible'), (5, 5, 'disponible'), (5, 6, 'disponible'), (5, 7, 'descompuesto'), 
 (5, 8, 'disponible'), (5, 9, 'disponible'), (5, 10, 'disponible');
 
+/*
 INSERT INTO asiento (id_sala, numero, estado) VALUES 
 (1, 1, 'disponible'), (1, 2, 'disponible'), (1, 3, 'disponible'), (1, 4, 'disponible'), (1, 5, 'disponible'), 
 (1, 6, 'disponible'), (1, 7, 'disponible'), (1, 8, 'disponible'), (1, 9, 'disponible'), (1, 10, 'disponible'), 
@@ -523,7 +524,7 @@ INSERT INTO asiento (id_sala, numero, estado) VALUES
 (2, 6, 'disponible'), (2, 7, 'disponible'), (2, 8, 'disponible'), (2, 9, 'disponible'), (2, 10, 'disponible'), 
 (2, 11, 'disponible'), (2, 12, 'disponible'), (2, 13, 'disponible'), (2, 14, 'disponible'), (2, 15, 'disponible'), 
 (2, 16, 'disponible'), (2, 17, 'disponible'), (2, 18, 'disponible'), (2, 19, 'disponible'), (2, 20, 'disponible');
-
+*/
 
 -- Insert sample data into boleto
 INSERT INTO boleto (id_funcion, id_venta, num_boleto) VALUES
