@@ -125,17 +125,17 @@ CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Se
 */
 
 
--- Para actualizar los totales de las ventas
+-- Para actualizar el total de la venta basandose en la cantidad de snacks y combos adquiridos
 -- DROP PROCEDURE actualizar_total_venta;
 DELIMITER //
 CREATE PROCEDURE actualizar_total_venta(IN p_id_venta INT)
 BEGIN
-	DECLARE v_es_venta_dulceria VARCHAR(50);
+    DECLARE v_es_venta_dulceria VARCHAR(50);
     DECLARE v_total_snacks DECIMAL(10, 2);
     DECLARE v_total_combos DECIMAL(10, 2);
     DECLARE v_total DECIMAL(10, 2);
     
-    -- Checar si la venta es de dulceria
+    -- Checar si la venta es de dulceria, solo se pueden actualizar las de dulceria
     SELECT area INTO v_es_venta_dulceria
     FROM venta WHERE id = p_id_venta;
     IF v_es_venta_dulceria != 'dulceria' THEN
@@ -144,23 +144,21 @@ BEGIN
     
 	-- Sumar el total de los snacks
 	SELECT SUM(s.precio * vs.cantidad) INTO v_total_snacks
-	FROM venta_snack vs
-	JOIN snack s ON vs.id_snack = s.id
+	FROM venta_snack AS vs
+	JOIN snack AS s ON vs.id_snack = s.id
 	WHERE vs.id_venta = p_id_venta;
 
-	-- Sumar el total de los combos (suponiendo que cada combo tiene un precio fijo)
+	-- Sumar el total de los combos
 	SELECT SUM(c.precio * vc.cantidad) INTO v_total_combos
-	FROM venta_combo vc
-	JOIN combo c ON vc.id_combo = c.id
+	FROM venta_combo AS vc
+	JOIN combo AS c ON vc.id_combo = c.id
 	WHERE vc.id_venta = p_id_venta;
 
 	-- Calcular el total total
 	SET v_total = IFNULL(v_total_snacks, 0) + IFNULL(v_total_combos, 0);
 
-	-- Actualizar el total en la tabla venta
-	UPDATE venta
-	SET total = v_total
-	WHERE id = p_id_venta;
+	-- Actualizar el total en venta
+	UPDATE venta SET total = v_total WHERE id = p_id_venta;
 END //
 DELIMITER ;
 
