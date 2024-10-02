@@ -108,7 +108,7 @@ WHERE puntos>100
 ORDER BY puntos DESC
 LIMIT 10;
 
--- 2.- Se quiere obtener una lista unica de peliculas que tengan una duracion myor a 120 minutos y que esten en la sala VIP
+-- 2.- Se quiere obtener una lista unica de peliculas que esten en la sala VIP
 SELECT DISTINCT p.titulo, s.categoria
 FROM funcion AS f INNER JOIN pelicula AS p ON f.id_pelicula=p.id INNER JOIN sala AS s ON f.id_sala=s.id
 WHERE s.categoria='VIP';
@@ -148,11 +148,13 @@ WHERE s.categoria='VIP' AND f.horario='18:00';
 
 -- 9.- Se desea calcular la cantidad de boletos vendidos por cada pelicula, para saber que peliculas son las más solicitadas
 SELECT p.titulo, COUNT(*) AS 'Total Boletos'
-FROM pelicula AS p INNER JOIN funcion AS f ON p.id=f.id_pelicula INNER JOIN boleto AS b ON f.id=b.id_funcion
-GROUP BY p.titulo;
+FROM pelicula AS p JOIN funcion AS f ON p.id=f.id_pelicula 
+JOIN boleto AS b ON f.id=b.id_funcion
+GROUP BY p.titulo
+ORDER BY COUNT(*) DESC;
 
 -- 10.- Se desea conocer el total de ventas de los empleados de taquilla para darle un bono de productividad al los que tengan los primeros tres lugares
-SELECT DISTINCT e.id, e.nombre, e.paterno, e.materno, SUM(v.total) AS Total_venta
+SELECT DISTINCT e.id, CONCAT(e.nombre, e.paterno, e.materno) AS 'Nombre Empleado', SUM(v.total) AS Total_venta
 FROM empleado AS e
 INNER JOIN venta AS v ON e.id = v.id_empleado
 WHERE v.area = 'taquilla'

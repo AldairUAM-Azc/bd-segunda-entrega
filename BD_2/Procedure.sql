@@ -87,17 +87,23 @@ CREATE PROCEDURE agregar_boleto (
 BEGIN
 	DECLARE v_asiento_ocupado INT;
     DECLARE p_id_venta INT;
+    DECLARE a_ocupados INT;
+    DECLARE a_capacidad INT;
 	INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES
 				(p_id_empleado, p_id_socio, p_metodo_pago, 'taquilla', p_total,  p_creada_en);
                 
-                
+	SELECT COUNT(*) INTO a_ocupados FROM boleto WHERE id_funcion=p_id_funcion;
+	SELECT s.capacidad INTO a_capacidad FROM funcion AS f JOIN sala AS s ON f.id_sala=s.id WHERE f.id= p_id_funcion;
+    
 	SELECT MAX(id) INTO p_id_venta FROM venta WHERE area='taquilla';
     -- Verificar si el asiento ya está ocupado para la función
     SELECT COUNT(*) INTO v_asiento_ocupado
     FROM boleto
     WHERE id_funcion = p_id_funcion AND num_boleto = p_num_boleto; -- Asegúrate de que la columna existe en boleto
     -- Comprobar si el asiento está ocupado
-    IF v_asiento_ocupado = 0 THEN
+    IF a_capacidad=a_ocupados THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No hay asientos disponibles';
+    ELSEIF v_asiento_ocupado = 0 THEN
         -- Insertar el boleto
         INSERT INTO boleto (id_funcion, id_venta, num_boleto)
         VALUES (p_id_funcion, p_id_venta, p_num_boleto);

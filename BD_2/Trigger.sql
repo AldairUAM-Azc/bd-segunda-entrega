@@ -1,5 +1,6 @@
-
-
+-- *********************************************************************
+-- Triggres
+-- *********************************************************************
 use cinetubi;
 /*Bitabora*/
 CREATE TABLE bitacora (
@@ -124,8 +125,8 @@ DELIMITER ;
 
 -- Pruebas VICENTE
 INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES (1, 5, 'credito', 'taquilla', 230, '2024-09-30 20:30:15');
-UPDATE venta SET total=9999 WHERE id=42;
-DELETE FROM venta where id=42;
+UPDATE venta SET total=9999 WHERE id=43;
+DELETE FROM venta where id=43;
 
 UPDATE categoria_empleado SET sueldo=5000 WHERE id=1; -- Error, ya que excede el maximo permitido
 UPDATE categoria_empleado SET sueldo=1000 WHERE id=1; -- Se puede, ya que 
