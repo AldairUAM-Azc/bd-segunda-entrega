@@ -6,6 +6,9 @@ DROP TRIGGER bitacora_AD_venta;
 DROP TRIGGER bitacora_AI_pelicula;
 DROP TRIGGER bitacora_AU_pelicula;
 DROP TRIGGER bitacora_AD_pelicula;
+DROP TRIGGER bitacora_AI_empleado;
+DROP TRIGGER bitacora_AU_empleado;
+DROP TRIGGER bitacora_AD_empleado;
 */
 
 CREATE TABLE bitacora (
@@ -146,5 +149,68 @@ SELECT * FROM bitacora;
  -- Ejemplo DELETE en pelicula
 DELETE FROM pelicula WHERE id = LAST_INSERT_ID();
 SELECT * FROM pelicula;
+SELECT * FROM bitacora;
+
+-- **********************************************************************************
+/* Aldair Oswaldo Avalos Albino */
+-- Trigger bitacora para tabla empleado
+-- **********************************************************************************
+-- Trigger bitacora para tabla empleado
+-- INSERT
+DELIMITER //
+CREATE TRIGGER bitacora_AI_empleado
+AFTER INSERT ON empleado
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('INSERT', 'empleado', NEW.id,
+            CONCAT(NEW.id, ';', NEW.nombre, ';', NEW.paterno, ';', NEW.materno, ';',NEW.id_categoria, ';', NEW.psw), 
+            null,
+            USER());
+END //
+DELIMITER ;
+
+-- UPDATE
+DELIMITER //
+CREATE TRIGGER bitacora_AU_empleado
+AFTER UPDATE ON empleado
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('UPDATE', 'empleado', NEW.id, 
+			CONCAT(OLD.id, ';', OLD.nombre, ';', OLD.paterno, ';', OLD.materno, ';',OLD.id_categoria, ';', OLD.psw), 
+			CONCAT(NEW.id, ';', NEW.nombre, ';', NEW.paterno, ';', NEW.materno, ';',NEW.id_categoria, ';', NEW.psw), 
+            USER());
+END //
+DELIMITER ;
+
+-- DELETE
+DELIMITER //
+CREATE TRIGGER bitacora_AD_empleado
+AFTER DELETE ON empleado
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('DELETE', 'empleado', OLD.id, 
+			CONCAT(OLD.id, ';', OLD.nombre, ';', OLD.paterno, ';', OLD.materno, ';',OLD.id_categoria, ';', OLD.psw), 
+            null, 
+            USER());
+END //
+DELIMITER ;
+
+INSERT INTO empleado (nombre, paterno, materno, id_categoria, psw) VALUES
+('Aldair', 'Avalos', 'Albino', 5, '192837465'); -- categoria 5 es auxiliar
+SELECT * FROM empleado;
+SELECT * FROM bitacora;
+
+ -- Ejemplo UPDATE en empleado
+UPDATE empleado SET nombre = 'Aldair Oswaldo', id_categoria = 4 WHERE id = LAST_INSERT_ID(); -- la categoria 4 es de supervisor
+SELECT * FROM empleado;
+SELECT * FROM bitacora;
+
+
+ -- Ejemplo DELETE en empleado
+DELETE FROM empleado WHERE id = LAST_INSERT_ID();
+SELECT * FROM empleado;
 SELECT * FROM bitacora;
 
