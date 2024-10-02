@@ -3,6 +3,9 @@ DROP TABLE bitacora;
 DROP TRIGGER bitacora_AI_venta;
 DROP TRIGGER bitacora_AU_venta;
 DROP TRIGGER bitacora_AD_venta;
+DROP TRIGGER bitacora_AI_pelicula;
+DROP TRIGGER bitacora_AU_pelicula;
+DROP TRIGGER bitacora_AD_pelicula;
 */
 
 CREATE TABLE bitacora (
@@ -15,18 +18,19 @@ CREATE TABLE bitacora (
     fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-/*José Vicente López López*/
+-- **********************************************************************************
+/* José Vicente López López */
 -- Trigger bitacora para tabla venta
+-- **********************************************************************************
 -- INSERT
 DELIMITER //
 CREATE TRIGGER bitacora_AI_venta
 AFTER INSERT ON venta
 FOR EACH ROW
 BEGIN
-    -- Registrar la operación en la tabla de bitácora para la venta
     INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
     VALUES ('INSERT', 'venta', NEW.id,
-			null,
+	     null,
             CONCAT(NEW.id, ';', NEW.id_empleado, ';', IFNULL(NEW.id_socio,'NULL'), ';', NEW.total, ';',NEW.creada_en, ';', NEW.metodo_pago, ';', NEW.area), 
             USER());
 
@@ -39,13 +43,11 @@ CREATE TRIGGER bitacora_AU_venta
 AFTER UPDATE ON venta
 FOR EACH ROW
 BEGIN
-    -- Registrar la operación en la tabla de bitácora para la venta
     INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
     VALUES ('UPDATE', 'venta', NEW.id, 
-			CONCAT(OLD.id, ';', OLD.id_empleado, ';', IFNULL(OLD.id_socio,'NULL'), ';', OLD.total, ';',OLD.creada_en, ';', OLD.metodo_pago, ';', OLD.area),
+	     		CONCAT(OLD.id, ';', OLD.id_empleado, ';', IFNULL(OLD.id_socio,'NULL'), ';', OLD.total, ';',OLD.creada_en, ';', OLD.metodo_pago, ';', OLD.area),
 			CONCAT(NEW.id, ';', NEW.id_empleado, ';', IFNULL(NEW.id_socio,'NULL'), ';', NEW.total, ';',NEW.creada_en, ';', NEW.metodo_pago, ';', NEW.area),
             USER());
-
 END //
 DELIMITER ;
 
@@ -55,13 +57,11 @@ CREATE TRIGGER bitacora_AD_venta
 AFTER DELETE ON venta
 FOR EACH ROW
 BEGIN
-    -- Registrar la operación en la tabla de bitácora para la venta
     INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
     VALUES ('DELETE', 'venta', OLD.id, 
 			CONCAT(OLD.id, ';', OLD.id_empleado, ';', OLD.id_socio, ';', OLD.total, ';',OLD.creada_en, ';', OLD.metodo_pago, ';', OLD.area),
             null, 
             USER());
-
 END //
 DELIMITER ;
 
@@ -81,5 +81,69 @@ SELECT * FROM bitacora;
  -- Ejemplo DELETE en venta
 DELETE FROM venta WHERE id = LAST_INSERT_ID();
 SELECT * FROM venta;
+SELECT * FROM bitacora;
+
+-- **********************************************************************************
+/* Jonathan Hernandez */
+-- Trigger bitacora para tabla pelicula
+-- **********************************************************************************
+-- Trigger bitacora para tabla pelicula
+-- INSERT
+DELIMITER //
+CREATE TRIGGER bitacora_AI_pelicula
+AFTER INSERT ON pelicula
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('INSERT', 'pelicula', NEW.id,
+			null,
+            CONCAT(NEW.id, ';', NEW.titulo, ';', NEW.distribuidor, ';', NEW.clasificacion, ';',NEW.director, ';', NEW.descripcion), 
+            USER());
+END //
+DELIMITER ;
+
+-- UPDATE
+DELIMITER //
+CREATE TRIGGER bitacora_AU_pelicula
+AFTER UPDATE ON pelicula
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('UPDATE', 'pelicula', NEW.id, 
+			CONCAT(OLD.id, ';', OLD.titulo, ';', OLD.distribuidor, ';', OLD.clasificacion, ';',OLD.director, ';', OLD.descripcion), 
+			CONCAT(NEW.id, ';', NEW.titulo, ';', NEW.distribuidor, ';', NEW.clasificacion, ';',NEW.director, ';', NEW.descripcion), 
+            USER());
+END //
+DELIMITER ;
+
+-- DELETE
+DELIMITER //
+CREATE TRIGGER bitacora_AD_pelicula
+AFTER DELETE ON pelicula
+FOR EACH ROW
+BEGIN
+    INSERT INTO bitacora (tipo_operacion, tabla_afectada, id_registro_afectado, valores_anteriores, valores_nuevos, usuario_aplicacion)
+    VALUES ('DELETE', 'pelicula', OLD.id, 
+			CONCAT(OLD.id, ';', OLD.titulo, ';', OLD.distribuidor, ';', OLD.clasificacion, ';',OLD.director, ';', OLD.descripcion), 
+            null, 
+            USER());
+END //
+DELIMITER ;
+
+
+ -- Ejemplo INSERT en pelicula
+INSERT INTO pelicula (titulo, duracion, distribuidor, clasificacion, director, descripcion) VALUES
+('Arrancame la vida', 107, 2, 'R', 5, 'La historia de enmacipacion de una mujer poblana de clase baja.');
+SELECT * FROM pelicula;
+SELECT * FROM bitacora;
+
+ -- Ejemplo UPDATE en pelicula
+UPDATE pelicula SET duracion = 120, clasificacion = 'PG-13', descripcion = 'Catalina lucha por encontrar su libertad e identidad.' WHERE id = LAST_INSERT_ID();
+SELECT * FROM pelicula;
+SELECT * FROM bitacora;
+
+ -- Ejemplo DELETE en pelicula
+DELETE FROM pelicula WHERE id = LAST_INSERT_ID();
+SELECT * FROM pelicula;
 SELECT * FROM bitacora;
 
