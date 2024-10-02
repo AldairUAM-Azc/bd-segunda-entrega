@@ -62,17 +62,14 @@ DELIMITER ;
 
 
 -- DROP PROCEDURE agregar_funcion;
-select * FROM sala;
-select * FROM pelicula;
-select * FROM funcion;
 
 -- Inserts para probar la lógica del Negocio
-CALL agregar_funcion(1, '2024-10-01', '12:00:00', 9, 'Español'); -- Intentando añadir una funcion en sala en mantenimiento
-CALL agregar_funcion(5, '2024-10-01', '15:00:00', 1, 'Español'); -- Añadiendo una funcion cuando ya hay asignadas funciones a esa hora en esa sala
-CALL agregar_funcion(2, '2024-10-01', '15:00:00', 8, 'Español'); -- Añadiendo una funcion no apta para niños en sala para niños
+CALL agregar_funcion(1, '2024-10-01', '12:00:00', 2, 'Español'); -- Intentando añadir una funcion en sala en mantenimiento
+CALL agregar_funcion(5, '2024-09-16', '18:00:00', 1, 'Español'); -- Añadiendo una funcion cuando ya hay asignadas funciones a esa hora en esa sala
+CALL agregar_funcion(2, '2024-10-01', '15:00:00', 11, 'Español'); -- Añadiendo una funcion no apta para niños en sala para niños
 CALL agregar_funcion(2, '2024-10-01', '9:00:00', 1, 'Español'); -- Añadiendo una funcion mal horario (temprano)
 CALL agregar_funcion(2, '2024-10-01', '23:00:00', 1, 'Español'); -- Añadiendo una funcion mal horario (tarde)
-CALL agregar_funcion(3, '2024-10-01', '15:00:00', 8, 'Español'); -- Añadiendo una funcion que pasa todos los filtros
+CALL agregar_funcion(3, '2024-10-01', '15:00:00', 11, 'Español'); -- Añadiendo una funcion que pasa todos los filtros
 
 
 -- José Vicente López López 2212002118
