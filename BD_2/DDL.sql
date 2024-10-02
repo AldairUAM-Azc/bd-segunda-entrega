@@ -93,7 +93,8 @@ CREATE TABLE snack (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL CHECK (precio > 0),
-    tamanio VARCHAR(10) NULL CHECK(tamanio IN ('chico', 'mediano','grande'))
+    tamanio VARCHAR(10) NULL CHECK(tamanio IN ('chico', 'mediano','grande')),
+    stock INT NOT NULL DEFAULT 100
 );
 
 -- Crear tabla venta
