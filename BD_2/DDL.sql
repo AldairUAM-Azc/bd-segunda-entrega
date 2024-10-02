@@ -56,9 +56,9 @@ CREATE TABLE pelicula (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(50) NOT NULL,
     duracion INT NOT NULL CHECK (duracion > 0),
-    distribuidor INT NOT NULL,
+    distribuidor INT,
     clasificacion VARCHAR(10) NOT NULL CHECK (clasificacion IN ('R','PG-13','PG')),
-    director INT NOT NULL,
+    director INT,
     descripcion MEDIUMTEXT NOT NULL,
     CONSTRAINT fk_director FOREIGN KEY (director) REFERENCES director(id)
         ON DELETE RESTRICT ON UPDATE CASCADE,
