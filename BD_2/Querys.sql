@@ -38,7 +38,7 @@ FROM funcion
 GROUP BY idioma;
 
 /*
-5.- Contar cuántos distribuidores hay de peliclas con  clasificación por diferentes de "R".
+5.- Contar cuántos distribuidores hay de peliclas con  clasificación diferentes de "R".
 */
 SELECT COUNT(DISTINCT d.id) AS total_distribuidores
 FROM distribuidor d
