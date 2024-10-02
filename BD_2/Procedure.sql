@@ -121,11 +121,68 @@ CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Se
 
 
 /*
- * Consultas Aldair Oswaldo Avalos Albino 2222005685
+ * Procedure Aldair Oswaldo Avalos Albino 2222005685
 */
+
+
+-- Para actualizar los totales de las ventas
+-- DROP PROCEDURE actualizar_total_venta;
+DELIMITER //
+CREATE PROCEDURE actualizar_total_venta(IN p_id_venta INT)
+BEGIN
+	DECLARE v_es_venta_dulceria VARCHAR(50);
+    DECLARE v_total_snacks DECIMAL(10, 2);
+    DECLARE v_total_combos DECIMAL(10, 2);
+    DECLARE v_total DECIMAL(10, 2);
+    
+    -- Checar si la venta es de dulceria
+    SELECT area INTO v_es_venta_dulceria
+    FROM venta WHERE id = p_id_venta;
+    IF v_es_venta_dulceria != 'dulceria' THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La venta no es del area de dulceria';
+    END IF;
+    
+	-- Sumar el total de los snacks
+	SELECT SUM(s.precio * vs.cantidad) INTO v_total_snacks
+	FROM venta_snack vs
+	JOIN snack s ON vs.id_snack = s.id
+	WHERE vs.id_venta = p_id_venta;
+
+	-- Sumar el total de los combos (suponiendo que cada combo tiene un precio fijo)
+	SELECT SUM(c.precio * vc.cantidad) INTO v_total_combos
+	FROM venta_combo vc
+	JOIN combo c ON vc.id_combo = c.id
+	WHERE vc.id_venta = p_id_venta;
+
+	-- Calcular el total total
+	SET v_total = IFNULL(v_total_snacks, 0) + IFNULL(v_total_combos, 0);
+
+	-- Actualizar el total en la tabla venta
+	UPDATE venta
+	SET total = v_total
+	WHERE id = p_id_venta;
+END //
+DELIMITER ;
+
+CALL actualizar_total_venta(4);
+SELECT * FROM venta;
+
+SELECT SUM(s.precio * vs.cantidad) 
+	FROM venta_snack vs
+	JOIN snack s ON vs.id_snack = s.id
+	WHERE vs.id_venta = 4;
+    
+SELECT SUM(c.precio * vc.cantidad)
+	FROM venta_combo vc
+	JOIN combo c ON vc.id_combo = c.id
+	WHERE vc.id_venta = 4;
+
+
+
+
 -- Inserta un registro en venta_snack dados un id_venta, un id_snack y una cantidad. Se valida que tanto como la venta como el snack existan.
 -- p_ es parametro, v_ es variable
-
+/*
 DELIMITER //
 CREATE PROCEDURE agregar_snack_a_venta (
     IN p_id_venta INT,
@@ -179,3 +236,11 @@ CALL agregar_snack_a_venta(1, 10, 3);
 
 -- snack 15 no existe
 CALL agregar_snack_a_venta(37, 15, 3);
+*/
+
+
+
+
+
+
+
