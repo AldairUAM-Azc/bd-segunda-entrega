@@ -3,7 +3,6 @@
 -- *********************************************************************
 /*
 use cinetubi;
-/*Bitabora*/
 CREATE TABLE bitacora (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tipo_operacion VARCHAR(20) NOT NULL,
