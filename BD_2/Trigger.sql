@@ -1,6 +1,7 @@
 -- *********************************************************************
 -- Triggres
 -- *********************************************************************
+/*
 use cinetubi;
 /*Bitabora*/
 CREATE TABLE bitacora (
@@ -12,8 +13,9 @@ CREATE TABLE bitacora (
     usuario_aplicacion VARCHAR(50) NOT NULL,
     fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+*/
 
--- Triggers  Hernández Aguilar Jonathan Abraham 2182004371
+--Triggers  Hernández Aguilar Jonathan Abraham 2182004371
 
 DELIMITER //
 CREATE TRIGGER limitar_peliculas
@@ -36,6 +38,8 @@ DELIMITER ;
 /*
  *Triggers José Vicente López López 2212002118
 */
+
+/*
 -- Trigger Agregar Venta
 DELIMITER //
 CREATE TRIGGER venta_AI
@@ -79,6 +83,7 @@ BEGIN
             USER());
 END //
 DELIMITER ;
+*/
 
 -- Es neseario saber que el sueldo maximo para cada empleado es de '4314.39', por lo que es necesario que no deje modificar en caso de que un empleado tenga acceso para modificar el sueldo.
 DELIMITER //
