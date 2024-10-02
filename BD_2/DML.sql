@@ -246,7 +246,8 @@ INSERT INTO sala (categoria, capacidad, estado) VALUES
 ('VIP', 30, 'disponible'),
 ('Standard', 30, 'mantenimiento'),
 ('Premium', 30, 'disponible'),
-('VIP', 30, 'disponible');
+('VIP', 30, 'disponible'),
+('Junior', 30, 'disponible');
 
 
 -- Insert sample data into funcion
