@@ -68,7 +68,7 @@ DELIMITER ;
 DROP  TRIGGER venta_AU;
 DELIMITER //
 CREATE TRIGGER venta_AU
-BEFORE UPDATE ON venta
+AFTER UPDATE ON venta
 FOR EACH ROW
 BEGIN
     -- Registrar la operación en la tabla de bitácora para la venta

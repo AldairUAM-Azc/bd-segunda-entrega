@@ -81,7 +81,6 @@ CREATE PROCEDURE agregar_boleto (
     IN p_total DECIMAL(10,2),
     IN p_creada_en DATETIME,
     IN p_metodo_pago VARCHAR(50),
-    IN p_area VARCHAR(50),
     IN p_id_funcion INT,
     IN p_num_boleto INT
 )
@@ -89,16 +88,14 @@ BEGIN
 	DECLARE v_asiento_ocupado INT;
     DECLARE p_id_venta INT;
 	INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES
-				(p_id_empleado, p_id_socio, p_metodo_pago, p_area, p_total, p_creada_en);
+				(p_id_empleado, p_id_socio, p_metodo_pago, p_area, 'taquilla', p_creada_en);
                 
                 
-	SELECT MAX(id) INTO p_id_venta FROM venta;
+	SELECT MAX(id) INTO p_id_venta FROM venta WHERE area='taquilla';
     -- Verificar si el asiento ya está ocupado para la función
     SELECT COUNT(*) INTO v_asiento_ocupado
     FROM boleto
-    WHERE id_funcion = p_id_funcion 
-      AND num_boleto = p_num_boleto; -- Asegúrate de que la columna existe en boleto
-
+    WHERE id_funcion = p_id_funcion AND num_boleto = p_num_boleto; -- Asegúrate de que la columna existe en boleto
     -- Comprobar si el asiento está ocupado
     IF v_asiento_ocupado = 0 THEN
         -- Insertar el boleto
@@ -113,8 +110,8 @@ END //
 
 DELIMITER ;
 
-CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 'taquilla', 2, 30); -- Se agrega correctamente
-CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 'taquilla', 2, 30); -- Marca error puesto que ya esta ocupado ese asiento en esa sala para esa funcion
+CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Se agrega correctamente
+CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Marca error puesto que ya esta ocupado ese asiento en esa sala para esa funcion
 
 
 /*
