@@ -69,7 +69,7 @@ CREATE TABLE pelicula (
 -- Crear tabla sala
 CREATE TABLE sala (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    categoria VARCHAR(50) NOT NULL CHECK (categoria IN ('VIP','Standard','Premium')),
+    categoria VARCHAR(50) NOT NULL CHECK (categoria IN ('VIP','Standard','Premium', 'Junior')),
     capacidad INT NOT NULL CHECK (capacidad > 0 AND capacidad <= 30),
     estado VARCHAR(50) NOT NULL CHECK (estado IN ('disponible', 'ocupada', 'mantenimiento'))
 );
