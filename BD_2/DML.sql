@@ -295,7 +295,7 @@ INSERT INTO combo (nombre, precio) VALUES
 -- Insert sample data into venta
 INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES
 (3, NULL, 'efectivo', 'taquilla', 230, '2024-09-17 20:30:15'),
-(5, NULL, 'credito', 'dulceria', 120, '2024-09-16 21:30:15'),
+(5, NULL, 'credito', 'taquilla', 120, '2024-09-16 21:30:15'),
 (1, NULL, 'efectivo', 'taquilla', 235, '2024-09-18 19:30:15'),
 (7, 1, 'credito', 'dulceria', 230, '2024-09-17 18:30:15'),
 (1, NULL, 'efectivo', 'taquilla', 120, '2024-09-18 18:31:12'),
@@ -313,7 +313,7 @@ INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) V
 (7, NULL, 'credito', 'taquilla', 100, '2024-09-17 02:30:15'),
 (1, 5, 'efectivo', 'dulceria', 90, '2024-09-17 20:30:15'),
 (5, NULL, 'credito', 'taquilla', 300, '2024-09-16 20:30:15'),
-(8, 6, 'efectivo', 'dulceria', 320, '2024-09-16 21:20:15'),
+(8, 6, 'efectivo', 'taquilla', 320, '2024-09-16 21:20:15'),
 (9, NULL, 'credito', 'taquilla', 270, '2024-09-17 20:20:15'),
 
 (3, 7, 'efectivo', 'dulceria', 230, '2024-09-17 20:30:15'),
@@ -329,39 +329,15 @@ INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) V
 
 (2, NULL, 'efectivo', 'dulceria', 250, '2024-09-17 20:30:15'),
 (1, NULL, 'credito', 'taquilla', 150, '2024-09-16 21:30:15'),
-(5, NULL, 'efectivo', 'dulceria', 240, '2024-09-18 19:30:15'),
+(5, NULL, 'efectivo', 'taquilla', 240, '2024-09-18 19:30:15'),
 (7, 11, 'credito', 'taquilla', 280, '2024-09-17 18:30:15'),
 (4, NULL, 'efectivo', 'dulceria', 160, '2024-09-18 18:31:12'),
 (9, NULL, 'credito', 'taquilla', 100, '2024-09-17 02:30:15'),
 (8, 12, 'efectivo', 'dulceria', 90, '2024-09-17 20:30:15'),
 (3, NULL, 'credito', 'taquilla', 300, '2024-09-16 20:30:15'),
-(10, NULL, 'efectivo', 'dulceria', 320, '2024-09-16 21:20:15'),
+(10, NULL, 'efectivo', 'taquilla', 320, '2024-09-16 21:20:15'),
 (5, 13, 'credito', 'taquilla', 270, '2024-09-17 20:20:15');
-	
--- Insert sample data into asiento
-/*
-INSERT INTO asiento (id_sala, numero, estado) VALUES
-(1, 1, 'disponible'), (1, 2, 'disponible'), (1, 3, 'disponible'), (1, 4, 'descompuesto'), (1, 5, 'disponible'), (1, 6, 'disponible'), (1, 7, 'descompuesto'), 
-(1,8,'disponible'), (1, 9, 'disponible'), (1, 10, 'disponible'), (2,1,'disponible'), (2,2,'disponible'), (2, 3, 'descompuesto'), (2, 4, 'disponible'), (2, 5, 'disponible'), 
-(2, 6, 'descompuesto'), (2, 7, 'disponible'), (2, 8, 'disponible'), (2, 9, 'disponible'), (2, 10, 'descompuesto'), (3, 1, 'descompuesto'), (3, 2, 'disponible'), (3, 3, 'disponible'), 
-(3, 4, 'descompuesto'), (3, 5, 'disponible'), (3, 6, 'disponible'), (3, 7, 'disponible'), (3, 8, 'descompuesto'), (3, 9, 'disponible'), (3, 10, 'disponible'), (4, 1, 'disponible'), 
-(4, 2, 'descompuesto'), (4, 3, 'disponible'), (4, 4, 'disponible'), (4, 5, 'descompuesto'), (4, 6, 'disponible'), (4, 7, 'disponible'), (4, 8, 'disponible'), (4, 9, 'descompuesto'), 
-(4, 10, 'disponible'), (5, 1, 'disponible'), (5, 2, 'disponible'), (5, 3, 'descompuesto'), (5, 4, 'disponible'), (5, 5, 'disponible'), (5, 6, 'disponible'), (5, 7, 'descompuesto'), 
-(5, 8, 'disponible'), (5, 9, 'disponible'), (5, 10, 'disponible');
 
-/*
-INSERT INTO asiento (id_sala, numero, estado) VALUES 
-(1, 1, 'disponible'), (1, 2, 'disponible'), (1, 3, 'disponible'), (1, 4, 'disponible'), (1, 5, 'disponible'), 
-(1, 6, 'disponible'), (1, 7, 'disponible'), (1, 8, 'disponible'), (1, 9, 'disponible'), (1, 10, 'disponible'), 
-(1, 11, 'disponible'), (1, 12, 'disponible'), (1, 13, 'disponible'), (1, 14, 'disponible'), (1, 15, 'disponible'), 
-(1, 16, 'disponible'), (1, 17, 'disponible'), (1, 18, 'disponible'), (1, 19, 'disponible'), (1, 20, 'disponible'), 
-(1, 21, 'disponible'), (1, 22, 'disponible'), (1, 23, 'disponible'), (1, 24, 'disponible'), (1, 25, 'disponible'), 
-(1, 26, 'disponible'), (1, 27, 'disponible'), (1, 28, 'disponible'), (1, 29, 'disponible'), (1, 30, 'disponible'), 
-(2, 1, 'disponible'), (2, 2, 'disponible'), (2, 3, 'disponible'), (2, 4, 'disponible'), (2, 5, 'disponible'), 
-(2, 6, 'disponible'), (2, 7, 'disponible'), (2, 8, 'disponible'), (2, 9, 'disponible'), (2, 10, 'disponible'), 
-(2, 11, 'disponible'), (2, 12, 'disponible'), (2, 13, 'disponible'), (2, 14, 'disponible'), (2, 15, 'disponible'), 
-(2, 16, 'disponible'), (2, 17, 'disponible'), (2, 18, 'disponible'), (2, 19, 'disponible'), (2, 20, 'disponible');
-*/
 
 -- Insert sample data into boleto
 INSERT INTO boleto (id_funcion, id_venta, num_boleto) VALUES
@@ -371,21 +347,21 @@ INSERT INTO boleto (id_funcion, id_venta, num_boleto) VALUES
 (2, 2, 14), (2, 2, 13), (2, 2, 12),  (2, 2, 11), (2, 2, 10),
 (3, 3, 20), (3, 3, 3), 	(3, 3, 2),	 (3, 3, 5),  (3, 3, 8),
 (3, 3, 28), (3, 3, 29), (3, 3, 30),  (3, 3, 21), (3, 3, 22),
-(4, 4, 15), (4, 4, 16), (4, 4, 17),  (4, 4, 18), (4, 4, 19);
+(4, 5, 15), (4, 5, 16), (4, 5, 17),  (4, 5, 18), (4, 5, 19);
 
 INSERT INTO boleto (id_venta, id_funcion, num_boleto) VALUES 
-(11, 5, 1),	 (12, 6, 2), 	(13, 7, 3), 	(14, 8, 4), 	(15, 9, 5), 
-(16, 10, 6), (17, 5, 7), 	(18, 6, 8), 	(19, 7, 9), 	(20, 8, 10), 
-(21, 9, 11), (22, 10, 12), 	(23, 5, 13), 	(24, 6, 14), 	(25, 7, 15), 
-(27, 9, 17), (28, 10, 18), 	(29, 5, 19), 	(30, 6, 20), 	(26, 8, 16), 
-(31, 7, 21), (32, 8, 22), 	(33, 9, 23), 	(34, 10, 24), 	(19, 8, 10), 
-(35, 5, 25), (36, 6, 26), 	(37, 7, 27), 	(38, 8, 28), 	(18, 7, 9), 
-(39, 9, 29), (40, 10, 30),	(11, 6, 2), 	(12, 7, 3), 	(33, 10, 24), 
-(13, 8, 4),  (14, 9, 5), 	(15, 10, 6),	(16, 5, 7), 	(17, 6, 8), 
-(20, 9, 11), (21, 10, 12), 	(22, 5, 13),	(23, 6, 14), 	(32, 9, 23), 
-(24, 7, 15), (25, 8, 16), 	(26, 9, 17), 	(27, 10, 18), 	(35, 6, 26), 
-(28, 5, 19), (29, 6, 20), 	(30, 7, 21), 	(31, 8, 22), 	(34, 5, 25), 
-(36, 7, 27), (37, 8, 28), 	(38, 9, 29),	(39, 10, 30);
+(12, 5, 1),	 (12, 6, 2), 	(12, 7, 3), 	(14, 8, 4), 	(14, 9, 5), 
+(16, 10, 6), (14, 5, 7), 	(14, 6, 8), 	(16, 7, 9), 	(7, 8, 10), 
+(26, 9, 11), (26, 10, 12), 	(26, 5, 13), 	(26, 6, 14), 	(26, 7, 15), 
+(28, 9, 17), (28, 10, 18), 	(28, 5, 19), 	(28, 6, 20), 	(28, 8, 16), 
+(30, 7, 21), (30, 8, 22), 	(30, 9, 23), 	(40, 10, 24), 	(30, 8, 10), 
+(34, 5, 25), (36, 6, 26), 	(36, 7, 27), 	(38, 8, 28), 	(18, 7, 9), 
+(38, 9, 29), (40, 10, 30),	(12, 6, 2), 	(12, 7, 3), 	(40, 10, 24), 
+(12, 8, 4),  (14, 9, 5), 	(14, 10, 6),	(16, 5, 7), 	(18, 6, 8), 
+(20, 9, 11), (38, 10, 12), 	(22, 5, 13),	(7, 6, 14), 	(32, 9, 23), 
+(24, 7, 15), (7, 8, 16), 	(26, 9, 17), 	(40, 10, 18), 	(36, 6, 26), 
+(28, 5, 19), (19, 6, 20), 	(30, 7, 21), 	(32, 8, 22), 	(34, 5, 25), 
+(36, 7, 27), (7, 8, 28), 	(38, 9, 29),	(40, 10, 30);
 
 
 INSERT INTO venta_snack (id_venta, id_snack, cantidad) VALUES

@@ -1,7 +1,7 @@
 -- *********************************************************************
 -- Querys
 -- *********************************************************************
-use cientubi;
+use cinetubi;
 -- Consultas Hernández Aguilar Jonathan Abraham 2182004371
 /*
 1.- Muestra el nombre de la pelicula, duracion y clasificacion de las peliculas cuyo titulo empiecen con "The" y la duración esté entre 90 y 120 minutos. 
@@ -44,9 +44,6 @@ SELECT COUNT(DISTINCT d.id) AS total_distribuidores
 FROM distribuidor d
 INNER JOIN pelicula p ON d.id = p.distribuidor
 WHERE p.clasificacion != 'R';
-
-
-
 
 /* 
 6.- En una revisión, necesitan saber cuales fueron las ultimas 15 funciones programadas. Neceitan ver el nombre de la pelicula y los datos de la funcion tales como fecha, hora y sala.

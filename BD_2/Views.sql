@@ -18,7 +18,7 @@ SELECT * FROM vista_funcion;
 -- José Vicente López López
 -- Se desea conocer las ventas que se han hecho, quien la ha hecho y una breve descripcion de la funcion, asi como el asiento y la sala.
 CREATE VIEW V_B_E_F_P_S AS
-SELECT v.id AS id_venta, e.nombre AS nombre_empleado, p.titulo AS pelicula_titulo, f.horario AS funcion_horario, b.num_boleto, s.id AS sala, s.categoria AS categoria_sala, f.idioma AS idioma
+SELECT v.id AS id_venta, CONCAT(e.nombre, ' ', e.paterno, ' ', e.materno) AS nombre_empleado, p.titulo AS pelicula_titulo, f.horario AS funcion_horario, b.num_boleto, s.id AS sala, s.categoria AS categoria_sala, f.idioma AS idioma
 FROM venta AS v INNER JOIN boleto AS b ON v.id=b.id_venta
 INNER JOIN funcion AS f ON b.id_funcion=f.id
 INNER JOIN pelicula AS p ON f.id_pelicula=p.id

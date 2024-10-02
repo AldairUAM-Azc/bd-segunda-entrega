@@ -58,7 +58,7 @@ BEGIN
 END //
 
 DELIMITER ;
-
+-- DROP PROCEDURE agregar_funcion;
 
 
 -- DROP PROCEDURE agregar_funcion;
@@ -88,7 +88,7 @@ BEGIN
 	DECLARE v_asiento_ocupado INT;
     DECLARE p_id_venta INT;
 	INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES
-				(p_id_empleado, p_id_socio, p_metodo_pago, p_area, 'taquilla', p_creada_en);
+				(p_id_empleado, p_id_socio, p_metodo_pago, 'taquilla', p_total,  p_creada_en);
                 
                 
 	SELECT MAX(id) INTO p_id_venta FROM venta WHERE area='taquilla';
@@ -109,9 +109,9 @@ BEGIN
 END //
 
 DELIMITER ;
-
+-- DROP PROCEDURE agregar_boleto;
 CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Se agrega correctamente
-CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Marca error puesto que ya esta ocupado ese asiento en esa sala para esa funcion
+-- CALL agregar_boleto(7,null, 150, '2024-09-30 02:44:15', 'credito', 2, 30); -- Marca error puesto que ya esta ocupado ese asiento en esa sala para esa funcion
 
 
 /*

@@ -15,7 +15,6 @@ CREATE TABLE bitacora (
 -- Triggers  Hernández Aguilar Jonathan Abraham 2182004371
 
 DELIMITER //
-
 CREATE TRIGGER limitar_peliculas
 BEFORE INSERT ON funcion
 FOR EACH ROW
@@ -38,7 +37,7 @@ DELIMITER ;
 */
 -- Trigger Agregar Venta
 DELIMITER //
-CREATE TRIGGER ventaAI
+CREATE TRIGGER venta_AI
 AFTER INSERT ON venta
 FOR EACH ROW
 BEGIN
@@ -65,7 +64,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP  TRIGGER venta_AU;
+-- DROP  TRIGGER venta_AU;
 DELIMITER //
 CREATE TRIGGER venta_AU
 AFTER UPDATE ON venta
@@ -80,18 +79,44 @@ BEGIN
 END //
 DELIMITER ;
 
- -- Pruebas VICENTE
-INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES
-(1, 5, 'credito', 'taquilla', 230, '2024-09-30 20:30:15');
-UPDATE venta SET total=9999 WHERE id=43;
+-- Es neseario saber que el sueldo maximo para cada empleado es de '4314.39', por lo que es necesario que no deje modificar en caso de que un empleado tenga acceso para modificar el sueldo.
+DELIMITER //
+CREATE TRIGGER actualizar_sueldo
+BEFORE UPDATE ON categoria_empleado
+FOR EACH ROW BEGIN
+    
+    IF NEW.sueldo > 4314.39 THEN 
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Salario exedido';
+    ELSEIF NEW.sueldo < 2000 THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Nos van a demandar, aumenta el salario.....:)';
+	ELSE
+		INSERT INTO bitacora (tipo_operacion, tabla_afectada, valores_anteriores, valores_nuevos, usuario_aplicacion)
+		VALUES ('UPDATE', 'categoria_empleado', 
+			CONCAT(OLD.id, ':', OLD.categoria, ':', OLD.sueldo), 
+			CONCAT(NEW.id, ':', NEW.categoria, ':', NEW.sueldo), 
+			USER());
+    END IF;
+END //
+DELIMITER ;
+
+-- Pruebas VICENTE
+INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES (1, 5, 'credito', 'taquilla', 230, '2024-09-30 20:30:15');
+UPDATE venta SET total=9999 WHERE id=42;
 DELETE FROM venta where id=42;
+
+UPDATE categoria_empleado SET sueldo=5000 WHERE id=1; -- Error, ya que excede el maximo permitido
+UPDATE categoria_empleado SET sueldo=1000 WHERE id=1; -- Se puede, ya que 
 SELECT * FROM bitacora;
+
+
 
 /*
  * Triggers Aldair Oswaldo Avalos Albino 2222005685
 */
 
-DROP TRIGGER actualizar_stock_snack;
+-- DROP TRIGGER actualizar_stock_snack;
 DELIMITER //
 CREATE TRIGGER actualizar_stock_snack
 BEFORE INSERT ON venta_snack
