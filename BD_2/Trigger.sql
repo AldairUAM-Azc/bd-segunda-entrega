@@ -101,6 +101,27 @@ FOR EACH ROW BEGIN
 END //
 DELIMITER ;
 
+-- Es necesario conocer si el asiento ya ha sido ocupado
+DELIMITER //
+CREATE TRIGGER boleto_BI
+BEFORE INSERT ON boleto
+FOR EACH ROW BEGIN
+    DECLARE ocupados INT;
+    DECLARE capacidad_sala INT;
+    
+    SELECT s.capacidad INTO capacidad_sala
+    FROM funcion AS f JOIN sala AS s ON f.id_sala=s.id
+    WHERE f.id=NEW.id_funcion;
+    
+    SELECT COUNT(*) INTO ocupados FROM boleto WHERE id_funcion=NEW.id_funcion;
+    
+    IF capacidad_sala<=ocupados THEN 
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay asientos disponibles';
+    END IF;
+END //
+DELIMITER ;
+
 -- Pruebas VICENTE
 INSERT INTO venta (id_empleado, id_socio, metodo_pago, area, total, creada_en) VALUES (1, 5, 'credito', 'taquilla', 230, '2024-09-30 20:30:15');
 UPDATE venta SET total=9999 WHERE id=42;
