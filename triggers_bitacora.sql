@@ -12,6 +12,7 @@ CREATE TABLE bitacora (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tipo_operacion VARCHAR(20) NOT NULL,
     tabla_afectada VARCHAR(50) NOT NULL,
+    id_registro_afectado INT NOT NULL,
     valores_anteriores MEDIUMTEXT,
     valores_nuevos MEDIUMTEXT,
     usuario_aplicacion VARCHAR(50) NOT NULL,
