@@ -182,31 +182,31 @@ INSERT INTO distribuidor (nombre, pais) VALUES
 -- Insert sample data into pelicula
 
 INSERT INTO pelicula (titulo, duracion, distribuidor, clasificacion, director, descripcion) VALUES
-('Jurassic Park', 127, 1, 'PG-13', 1, 'Una película sobre un parque temático donde los dinosaurios cobran vida.'),
-('Inception', 148, 2, 'PG-13', 2, 'Un ladrón roba secretos de los sueños y lucha por redimirse.'),
+('Jurassic Park', 127, null, 'PG-13', 1, 'Una película sobre un parque temático donde los dinosaurios cobran vida.'),
+('Inception', 148, 2, 'PG-13', null, 'Un ladrón roba secretos de los sueños y lucha por redimirse.'),
 ('Pulp Fiction', 154, 3, 'R', 3, 'Vidas interconectadas a través de crímenes y momentos inesperados.'),
 ('Goodfellas', 146, 4, 'R', 4, 'La vida de un gánster a través de varias décadas en Nueva York.'),
 ('Gladiator', 155, 5, 'R', 5, 'Un general romano busca venganza tras la traición del emperador.'),
-('Gravity', 91, 6, 'PG-13', 6, 'Dos astronautas quedan atrapados en el espacio tras un accidente.'),
+('Gravity', 91, null, 'PG-13', 6, 'Dos astronautas quedan atrapados en el espacio tras un accidente.'),
 ('The Shape of Water', 123, 7, 'R', 7, 'Una trabajadora se enamora de una criatura acuática capturada.'),
-('The Revenant', 156, 8, 'R', 8, 'Un hombre lucha por sobrevivir tras ser atacado por un oso.'),
+('The Revenant', 156, 8, 'R', null, 'Un hombre lucha por sobrevivir tras ser atacado por un oso.'),
 ('Volver', 121, 9, 'R', 9, 'Un relato sobre mujeres fuertes enfrentando el pasado y el presente.'),
-('The Grand Budapest Hotel', 99, 10, 'R', 10, 'La historia de un legendario conserje en un hotel de lujo.'),
+('The Grand Budapest Hotel', 99, null, 'R', null, 'La historia de un legendario conserje en un hotel de lujo.'),
 ('A Clockwork Orange', 136, 11, 'R', 11, 'Un joven delincuente es sometido a experimentos de rehabilitación.'),
 ('The Godfather', 175, 12, 'R', 12, 'La saga de una familia de la mafia en Nueva York.'),
 ('Beetlejuice', 92, 13, 'PG', 13, 'Una pareja fallecida trata de ahuyentar a los nuevos residentes de su casa.'),
 ('Fight Club', 139, 14, 'R', 14, 'Un hombre forma un club de lucha clandestino como escape de su vida.'),
-('Titanic', 195, 15, 'PG-13', 15, 'Una historia de amor a bordo del famoso barco Titanic.'),
+('Titanic', 195, 15, 'PG-13', null, 'Una historia de amor a bordo del famoso barco Titanic.'),
 ('Lost in Translation', 102, 16, 'R', 16, 'Un actor y una joven forjan una conexión inesperada en Tokio.'),
 ('There Will Be Blood', 158, 17, 'R', 17, 'La vida de un magnate del petróleo obsesionado con el poder.'),
 ('Black Swan', 108, 18, 'R', 18, 'Una bailarina lucha con la presión mientras se prepara para su papel soñado.'),
-('Do the Right Thing', 120, 19, 'R', 19, 'Un día de tensión racial en un vecindario de Brooklyn.'),
+('Do the Right Thing', 120, null, 'R', 19, 'Un día de tensión racial en un vecindario de Brooklyn.'),
 ('Star Wars', 121, 20, 'PG', 20, 'Una lucha épica entre el bien y el mal en una galaxia muy lejana.'),
 ('Blade Runner 2049', 164, 21, 'R', 21, 'Un replicante descubre un secreto que podría cambiar el futuro.'),
 ('Amélie', 122, 22, 'R', 22, 'Una joven busca mejorar la vida de los que la rodean en París.'),
-('Lady Bird', 94, 23, 'R', 23, 'Una joven navega por los retos de la adolescencia en Sacramento.'),
+('Lady Bird', 94, 23, 'R', null, 'Una joven navega por los retos de la adolescencia en Sacramento.'),
 ('Parasite', 132, 24, 'R', 24, 'Una familia pobre se infiltra en la vida de una familia rica.'),
-('Oldboy', 120, 25, 'R', 25, 'Un hombre busca venganza tras ser encarcelado sin explicación durante 15 años.'),
+('Oldboy', 120, null, 'R', 25, 'Un hombre busca venganza tras ser encarcelado sin explicación durante 15 años.'),
 ('Crouching Tiger, Hidden Dragon', 120, 26, 'PG-13', 26, 'Guerreros expertos buscan recuperar una espada robada en la antigua China.'),
 ('Seven Samurai', 207, 27, 'PG', 27, 'Un grupo de samuráis defiende una aldea de bandidos.'),
 ('Spirited Away', 125, 28, 'PG', 28, 'Una niña queda atrapada en un misterioso mundo de espíritus.'),
@@ -218,19 +218,19 @@ INSERT INTO pelicula (titulo, duracion, distribuidor, clasificacion, director, d
 ('The Pianist', 150, 34, 'R', 34, 'Un pianista judío sobrevive a la ocupación nazi en Varsovia.'),
 ('City of God', 130, 35, 'R', 35, 'La historia de dos jóvenes que crecen en una favela de Río de Janeiro.'),
 ('The Motorcycle Diaries', 126, 36, 'R', 36, 'Un joven Ernesto "Che" Guevara viaja por Sudamérica y se enfrenta a las injusticias sociales.'),
-('Shoplifters', 121, 37, 'R', 37, 'Una familia pobre sobrevive cometiendo pequeños robos en Tokio.'),
+('Shoplifters', 121, null, 'R', 37, 'Una familia pobre sobrevive cometiendo pequeños robos en Tokio.'),
 ('Jojo Rabbit', 108, 38, 'PG-13', 38, 'Un niño nazi descubre que su madre está escondiendo a una niña judía en su casa.'),
 ('Wonder Woman', 141, 39, 'PG-13', 39, 'La princesa amazona Diana se convierte en la heroína conocida como Wonder Woman.'),
 ('La La Land', 128, 40, 'PG-13', 40, 'Una historia de amor entre una aspirante a actriz y un músico en Los Ángeles.'),
 ('The Power of the Dog', 126, 41, 'R', 41, 'Dos hermanos enfrentan tensiones familiares en el oeste americano.'),
 ('Julie & Julia', 123, 42, 'PG-13', 42, 'Una joven decide cocinar todas las recetas de Julia Child en un año.'),
-('The Girl on the Bridge', 120, 43, 'R', 43, 'Una mujer joven es rescatada de una vida problemática por un lanzador de cuchillos.'),
+('The Girl on the Bridge', 120, null, 'R', 43, 'Una mujer joven es rescatada de una vida problemática por un lanzador de cuchillos.'),
 ('Beau Travail', 93, 44, 'R', 44, 'Un exoficial de la Legión Extranjera francesa reflexiona sobre su vida mientras patrulla en África.'),
 ('Monsoon Wedding', 114, 45, 'R', 45, 'Una boda en Nueva Delhi revela las tensiones familiares y secretos ocultos.'),
-('One Flew Over the Cuckoo\'s Nest', 133, 46, 'R', 46, 'Un hombre rebelde lidera una revuelta en una institución mental.'),
+('One Flew Over the Cuckoos Nest', 133, 46, 'R', 46, 'Un hombre rebelde lidera una revuelta en una institución mental.'),
 ('Vitalina Varela', 124, 47, 'R', 47, 'Una mujer viaja a Portugal después de la muerte de su esposo para descubrir su vida secreta.'),
 ('Hereditary', 127, 48, 'R', 48, 'Una familia descubre oscuros secretos tras la muerte de su abuela.'),
-('The Lighthouse', 110, 49, 'R', 49, 'Dos fareros en una isla remota luchan con la locura y los secretos ocultos.'),
+('The Lighthouse', 110, null, 'R', 49, 'Dos fareros en una isla remota luchan con la locura y los secretos ocultos.'),
 ('Avatar', 162, 50, 'PG-13', 15, 'Un marine parapléjico se infiltra en una raza alienígena en Pandora.');
 
 
@@ -238,13 +238,13 @@ INSERT INTO pelicula (titulo, duracion, distribuidor, clasificacion, director, d
 -- Insert sample data into sala
 INSERT INTO sala (categoria, capacidad, estado) VALUES
 ('VIP', 30, 'disponible'),
-('Standard', 30, 'ocupada'),
+('Standard', 30, 'mantenimiento'),
 ('Premium', 30, 'disponible'),
 ('VIP', 30, 'disponible'),
-('Standard', 30, 'ocupada'),
+('Standard', 30, 'mantenimiento'),
 ('Premium', 30, 'disponible'),
 ('VIP', 30, 'disponible'),
-('Standard', 30, 'ocupada'),
+('Standard', 30, 'mantenimiento'),
 ('Premium', 30, 'disponible'),
 ('VIP', 30, 'disponible');
 
@@ -259,8 +259,8 @@ INSERT INTO funcion (id_pelicula, fecha, horario, id_sala, idioma) VALUES
 (6, '2024-09-18', '22:00:00', 6, 'Español'),
 (7, '2024-09-19', '18:30:00', 7, 'Inglés'),
 (8, '2024-09-20', '20:00:00', 8, 'Español'),
-(9, '2024-09-21', '21:30:00', 9, 'Inglés'),
-(10, '2024-09-22', '23:00:00', 10, 'Español');
+(9, '2024-09-21', '21:30:00', 9, 'Japonés'),
+(10, '2024-09-22', '22:30:00', 10, 'Frances');
 
 -- Insert sample data into snack
 INSERT INTO snack (nombre, precio, tamanio) VALUES
