@@ -275,7 +275,7 @@ WHERE cs.id_snack IS NULL;
 SELECT COUNT(*) AS total_ventas
 FROM venta AS v WHERE v.creada_en BETWEEN '2024-09-16' AND '2024-09-17';
 
--- 10. Busca las ventas de los socios cuyos nombres empiezen con alter
+-- 10. Busca las ventas de los socios cuyos nombres empiezen con 'A'
 SELECT 
     s.nombre, s.paterno, 
     v.id_socio,
