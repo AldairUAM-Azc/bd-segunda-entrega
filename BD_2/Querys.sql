@@ -40,11 +40,12 @@ GROUP BY idioma;
 /*
 5.- Contar cuántas películas hay de cada clasificación por distribuidor, mostrando solo distribuidoras que tienen más de 3 películas clasificación "R".
 */
-SELECT d.nombre, p.clasificacion, COUNT(*) AS total_peliculas
+SELECT d.nombre, COUNT(*) AS total_peliculas
 FROM distribuidor d
-JOIN pelicula p ON d.id = p.distribuidor
-GROUP BY p.clasificacion
-HAVING p.clasificacion = 'R' AND COUNT(*) > 3;
+INNER JOIN pelicula p ON d.id = p.distribuidor
+WHERE p.clasificacion = 'R'
+GROUP BY d.nombre
+HAVING COUNT(*) > 3;
 
 
 
